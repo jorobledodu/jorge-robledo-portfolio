@@ -1,0 +1,188 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden; /* Para evitar scroll horizontal */
+}
+
+header {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Alinear el dropdown a la izquierda */
+.custom-dropdown {
+    position: absolute;
+    left: 20px;
+    z-index: 1;
+}
+
+/* Botón del dropdown */
+.dropdown-btn {
+    background-color: white;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 150px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-btn:hover {
+    background-color: orangered;
+    color: white;
+}
+
+/* Menú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    left: 100%;
+    top: 0;
+    width: 150px;
+}
+
+.dropdown-content li {
+    padding: 10px;
+    list-style-type: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content li:hover {
+    background-color: orangered;
+    color: white;
+}
+
+.custom-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Centrar el título en el header */
+#title {
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Posicionar el botón hamburguesa a la derecha */
+.menu-btn {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* Estilos para las barras del botón hamburguesa */
+.menu-btn .bar {
+    width: 35px;
+    height: 4px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Efecto hover para cambiar el color de las barras */
+.menu-btn:hover .bar {
+    background-color: orangered;
+}
+
+/* Cuando se abre el menú (se aplica la clase .open) */
+.menu-btn.open .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-btn.open .bar:nth-child(2) {
+    opacity: 0; /* Oculta la barra del medio */
+}
+
+.menu-btn.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Estilos para el menú de navegación */
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #444;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+}
+
+nav.show {
+    transform: translateX(0);
+}
+
+nav a {
+    margin: 20px 0;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: orangered;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .menu-btn {
+        right: 15px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .menu-btn .bar {
+        height: 3px;
+    }
+
+    .custom-dropdown {
+        left: 15px;
+    }
+}

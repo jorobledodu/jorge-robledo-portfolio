@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Jorge Robledo</title>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1 id="title">Bienvenido a mi portafolio</h1>
+
+        <!-- Dropdown personalizado -->
+        <div class="custom-dropdown">
+            <button class="dropdown-btn">Español</button>
+            <ul class="dropdown-content">
+                <li onclick="changeLanguage('en')">English</li>
+            </ul>
+        </div>
+
+        <div class="menu-btn" id="menu-btn" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </header>
+
+    <nav id="nav-menu">
+        <a href="#about" onclick="closeMenu()">Sobre mí</a>
+        <a href="#projects" onclick="closeMenu()">Proyectos</a>
+        <a href="#contact" onclick="closeMenu()">Contacto</a>
+    </nav>
+
+    <div class="container">
+        <!-- Sección sobre mí -->
+        <section id="about">
+            <h2 id="about-title">Sobre mí</h2>
+            <p id="about-description">Soy Jorge Robledo, desarrollador de videojuegos apasionado por la tecnología y el diseño de experiencias inmersivas...</p>
+        </section>
+
+        <!-- Sección de proyectos -->
+        <section id="projects">
+            <h2 id="projects-title">Proyectos</h2>
+            <div>
+                <img src="URL_DE_TU_IMAGEN" alt="Proyecto 1">
+                <p id="projects-description">Descripción del proyecto 1...</p>
+            </div>
+        </section>
+
+        <!-- Sección de contacto -->
+        <section id="contact">
+            <h2 id="contact-title">Contacto</h2>
+            <p id="contact-description">Email: jorge@example.com</p>
+        </section>
+    </div>
+
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
