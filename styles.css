@@ -12,70 +12,78 @@ header {
     color: white;
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Alinea el contenido al inicio */
     align-items: center;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Alinear el dropdown a la izquierda */
+/* Estilo base para el dropdown */
 .custom-dropdown {
-    position: absolute;
-    left: 20px;
-    z-index: 1;
+    position: relative;
+    display: inline-block;
+    z-index: 2;
 }
 
 /* Botón del dropdown */
 .dropdown-btn {
-    background-color: white;
-    color: #333;
+    background-color: #444; /* Color del fondo del botón */
+    color: white;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     cursor: pointer;
     width: 150px;
-    text-align: left;
+    text-align: center; /* Centrar el texto */
     transition: background-color 0.3s ease;
+    font-size: 14px; /* Asegura un tamaño de fuente estándar */
 }
 
 .dropdown-btn:hover {
-    background-color: orangered;
-    color: white;
+    background-color: #666; /* Más claro al hacer hover */
+    color: orangered;
 }
 
 /* Menú desplegable */
 .dropdown-content {
-    display: none;
+    display: none; /* El contenido está oculto por defecto */
     position: absolute;
-    background-color: white;
-    min-width: 150px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #444; /* Igual que el fondo del botón */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Añade una sombra */
     z-index: 999;
-    left: 100%;
-    top: 0;
-    width: 150px;
+    left: 0; /* Asegura que se alinee bajo el botón */
+    top: 80%; /* Se despliega justo debajo del botón */
+    width: 100%; /* Asegura que el contenido sea del mismo ancho que el botón */
+    border: 1px solid #444; /* Borde del mismo tono que el botón */
+    text-align: center; /* Centrar el texto dentro del contenido */
+    padding: 0; /* Elimina cualquier espacio adicional */
+    font-size: 14px; /* Ajusta el tamaño de la fuente para que coincida con el botón */
 }
 
+/* Cada opción del dropdown */
 .dropdown-content li {
     padding: 10px;
     list-style-type: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Añade transición al color */
+    color: white; /* Texto blanco por defecto */
 }
 
+/* Color cuando pasas el ratón sobre un ítem del dropdown */
 .dropdown-content li:hover {
-    background-color: orangered;
-    color: white;
+    background-color: #666; /* Color de hover ligeramente más claro */
+    color: orangered; /* Cambia el color del texto a orangered al hacer hover */
 }
 
-.custom-dropdown:hover .dropdown-content {
-    display: block;
+/* Mostrar el contenido del dropdown cuando se hace clic */
+.custom-dropdown.show .dropdown-content {
+    display: block; /* Cambia la visibilidad al hacer clic */
 }
 
 /* Centrar el título en el header */
 #title {
     margin: 0;
     text-align: center;
-    flex-grow: 1;
+    flex-grow: 1; /* Esto asegura que el título ocupe el espacio central */
 }
 
 /* Posicionar el botón hamburguesa a la derecha */
@@ -83,11 +91,10 @@ header {
     position: absolute;
     right: 20px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 40px;
-    height: 30px;
+    height: 40px;
     cursor: pointer;
     z-index: 2;
 }
@@ -97,7 +104,17 @@ header {
     width: 35px;
     height: 4px;
     background-color: white;
+    position: absolute;
     transition: all 0.3s ease-in-out;
+}
+
+/* Posicionamiento inicial de las dos barras */
+.menu-btn .bar:nth-child(1) {
+    top: 12px; /* Coloca la primera barra hacia arriba */
+}
+
+.menu-btn .bar:nth-child(2) {
+    top: 24px; /* Coloca la segunda barra hacia abajo */
 }
 
 /* Efecto hover para cambiar el color de las barras */
@@ -105,17 +122,15 @@ header {
     background-color: orangered;
 }
 
-/* Cuando se abre el menú (se aplica la clase .open) */
+/* Transformaciones cuando el menú está abierto */
 .menu-btn.open .bar:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg); /* Rota la primera barra 45 grados */
+    top: 18px; /* La centra verticalmente */
 }
 
 .menu-btn.open .bar:nth-child(2) {
-    opacity: 0; /* Oculta la barra del medio */
-}
-
-.menu-btn.open .bar:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: rotate(-45deg); /* Rota la segunda barra -45 grados */
+    top: 18px; /* La centra verticalmente */
 }
 
 /* Estilos para el menú de navegación */
@@ -171,6 +186,7 @@ img {
     height: auto;
 }
 
+/* Media queries para pantallas pequeñas */
 @media (max-width: 768px) {
     .menu-btn {
         right: 15px;

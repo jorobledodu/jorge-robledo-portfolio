@@ -11,5 +11,9 @@
     "contact": {
         "title": "Contacto",
         "description": "Email: jorge@example.com"
+    },
+    "buttons": {
+        "language1": "Español",
+        "language2": "English"
     }
 }

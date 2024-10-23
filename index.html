@@ -10,18 +10,17 @@
 <body>
 
     <header>
-        <h1 id="title">Bienvenido a mi portafolio</h1>
-
         <!-- Dropdown personalizado -->
         <div class="custom-dropdown">
-            <button class="dropdown-btn">Español</button>
+            <button class="dropdown-btn" id="current-language-btn" data-lang="es" onclick="toggleDropdown()">Español</button>
             <ul class="dropdown-content">
-                <li onclick="changeLanguage('en')">English</li>
+                <li id="lang-option1" onclick="changeLanguage('en')">English</li>
             </ul>
-        </div>
+        </div>   
+
+        <h1 id="title">Bienvenido a mi portafolio</h1>     
 
         <div class="menu-btn" id="menu-btn" onclick="toggleMenu()">
-            <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
