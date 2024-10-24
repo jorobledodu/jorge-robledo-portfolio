@@ -1,8 +1,13 @@
 {
     "title": "Welcome to my portfolio",
+    "nav_menu": {
+        "option1": "About me",
+        "option2": "Projects",
+        "option3": "Contact"
+    },
     "about": {
         "title": "About me",
-        "description": "I am Jorge Robledo, a video game developer passionate about technology and immersive experiences."
+        "description": "I am Jorge Robledo, a video game developer passionate about technology and immersive experience design."
     },
     "projects": {
         "title": "Projects",
@@ -13,7 +18,7 @@
         "description": "Email: jorge@example.com"
     },
     "buttons": {
-        "language1": "English",
-        "language2": "Español"
+        "lang-option1": "English",
+        "lang-option2": "Spanish"
     }
 }

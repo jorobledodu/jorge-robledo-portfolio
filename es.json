@@ -1,5 +1,10 @@
 {
     "title": "Bienvenido a mi portafolio",
+    "nav_menu": {
+        "option1": "Sobre mí",
+        "option2": "Proyectos",
+        "option3": "Contacto"
+    },
     "about": {
         "title": "Sobre mí",
         "description": "Soy Jorge Robledo, desarrollador de videojuegos apasionado por la tecnología y el diseño de experiencias inmersivas."
@@ -13,7 +18,7 @@
         "description": "Email: jorge@example.com"
     },
     "buttons": {
-        "language1": "Español",
-        "language2": "English"
+        "lang-option1": "Español",
+        "lang-option2": "Inglés"
     }
 }

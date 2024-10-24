@@ -8,7 +8,7 @@ function toggleDropdown() {
 function changeLanguage(lang) {
     const currentLang = document.getElementById('current-language-btn').getAttribute('data-lang');
 
-    // Si ya está en el idioma seleccionado, no hacer nada
+    // Si ya está en el idioma seleccionado, no cambiar de idioma
     if (currentLang === lang) {
         closeDropdown(); // Cerrar el dropdown si se hace clic en el mismo idioma
         return;
@@ -26,27 +26,43 @@ function changeLanguage(lang) {
 // Función para cargar el archivo JSON del idioma y actualizar los textos
 function loadLanguage(lang) {
     fetch(`${lang}.json`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error al cargar el archivo de idioma: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            // Actualizar los textos principales de la página
-            document.getElementById('title').innerText = data.title;
-            document.getElementById('about-title').innerText = data.about.title;
-            document.getElementById('about-description').innerText = data.about.description;
-            document.getElementById('projects-title').innerText = data.projects.title;
-            document.getElementById('projects-description').innerText = data.projects.description;
-            document.getElementById('contact-title').innerText = data.contact.title;
-            document.getElementById('contact-description').innerText = data.contact.description;
+            // Verificamos que el archivo JSON tenga todos los campos necesarios
+            if (data && data.title && data.about && data.projects && data.contact && data.buttons && data.nav_menu) {
+                
+                // Actualizar los textos del nav-menu
+                document.getElementById('nav_menu-option1').innerText = data.nav_menu.option1;
+                document.getElementById('nav_menu-option2').innerText = data.nav_menu.option2;
+                document.getElementById('nav_menu-option3').innerText = data.nav_menu.option3;
 
-            // Actualizar el botón principal con el idioma actual
-            document.getElementById('current-language-btn').innerText = lang === 'es' ? 'Español' : 'English'; // Botón principal muestra el idioma actual
+                // Actualizar los textos principales de la página
+                document.getElementById('title').innerText = data.title;
+                document.getElementById('about-title').innerText = data.about.title;
+                document.getElementById('about-description').innerText = data.about.description;
+                document.getElementById('projects-title').innerText = data.projects.title;
+                document.getElementById('projects-description').innerText = data.projects.description;
+                document.getElementById('contact-title').innerText = data.contact.title;
+                document.getElementById('contact-description').innerText = data.contact.description;
 
-            // Mostrar solo el idioma alternativo en el dropdown
-            const alternateLanguage = lang === 'es' ? 'en' : 'es';
-            document.getElementById('lang-option1').innerText = alternateLanguage === 'es' ? 'Español' : 'English'; // Mostrar el idioma alternativo
-            document.getElementById('lang-option1').setAttribute('onclick', `changeLanguage('${alternateLanguage}')`); // Cambiar al idioma alternativo
+                // Actualizar el botón principal con el idioma actual
+                document.getElementById('current-language-btn').innerText = data.buttons["lang-option1"];
+
+                // Mostrar solo el idioma alternativo en el dropdown
+                document.getElementById('lang-option1').innerText = data.buttons["lang-option2"];
+                document.getElementById('lang-option1').setAttribute('onclick', `changeLanguage('${lang === 'es' ? 'en' : 'es'}')`);
+            } else {
+                console.error('El archivo JSON no contiene todos los datos esperados.');
+            }
         })
         .catch(error => console.error('Error al cargar el archivo de idioma:', error));
 }
+
 
 // Función para cerrar el dropdown
 function closeDropdown() {
@@ -66,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Actualiza el valor de 'data-lang' y el texto del botón principal para reflejar el idioma activo
     document.getElementById('current-language-btn').setAttribute('data-lang', initialLang);
-    document.getElementById('current-language-btn').innerText = initialLang === 'es' ? 'Español' : 'English';
 });
 
 // Cerrar el dropdown si se hace clic fuera de él
