@@ -72,7 +72,7 @@ header {
 /* Color cuando pasas el ratón sobre un ítem del dropdown */
 .dropdown-content li:hover {
     background-color: #666; /* Color de hover ligeramente más claro */
-    color: orangered; /* Cambia el color del texto a orangered al hacer hover */
+    color: #ff4500; /* Cambia el color del texto a orangered al hacer hover */
 }
 
 /* Mostrar el contenido del dropdown cuando se hace clic */
