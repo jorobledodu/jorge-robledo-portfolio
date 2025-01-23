@@ -41,7 +41,7 @@ header {
 
 .dropdown-btn:hover {
     background-color: #666; /* Más claro al hacer hover */
-    color: orangered;
+    color: #ff4500;
 }
 
 /* Menú desplegable */
