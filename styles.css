@@ -40,7 +40,7 @@ header {
 }
 
 .dropdown-btn:hover {
-    background-color: #666; /* Más claro al hacer hover */
+    background-color: #00baff; /* Más claro al hacer hover */
     color: #ff4500;
 }
 
