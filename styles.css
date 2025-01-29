@@ -95,6 +95,18 @@ body {
   overflow-y: auto;
 }
 
+/* ✅ Animación de parpadeo */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* ✅ Aplicar parpadeo a la opción seleccionada */
+.terminal-selected {
+  animation: blink 1.5s infinite;
+}
+
 /* ✅ Ventana modal (Visor de Texto) */
 #text-viewer {
   position: fixed;
