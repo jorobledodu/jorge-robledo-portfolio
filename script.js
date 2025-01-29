@@ -118,3 +118,9 @@ document.addEventListener("keydown", (event) => {
 
 // ✅ Cargar el directorio al iniciar la Terminal
 document.addEventListener("DOMContentLoaded", loadDirectory);
+
+document.cookie.split(";").forEach((c) => {
+  document.cookie = c
+    .replace(/^ +/, "")
+    .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+});
