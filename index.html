@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +8,23 @@
 </head>
 <body>
 
-    <!-- ✅ Escritorio con icono de Terminal -->
+    <!-- Escritorio con iconos -->
     <div id="desktop">
         <div class="desktop-icon" id="terminal-icon">
-            <img src="Resources/icon - terminal.png" alt="Terminal">
+            <img src="Resources/icon-terminal.png" alt="Terminal">
             <p>Terminal</p>
+        </div>
+        <div class="desktop-icon" id="es-icon">
+            <img src="Resources/icon-es.png" alt="Spanish">
+            <p>Español</p>
+        </div>
+        <div class="desktop-icon" id="en-icon">
+            <img src="Resources/icon-en.png" alt="English">
+            <p>English</p>
         </div>
     </div>
 
-    <!-- ✅ Ventana de la terminal (inicialmente oculta) -->
+    <!-- Ventana de la terminal (inicialmente oculta) -->
     <div id="terminal-container" class="hidden">
         <div class="terminal-header">
             <span class="terminal-icon">Windows Terminal</span>
@@ -25,7 +33,7 @@
         <div id="terminal-output"></div>
     </div>
 
-    <!-- ✅ Ventana modal para ver archivos -->
+    <!-- Ventana modal para ver archivos -->
     <div id="text-viewer" class="hidden"></div>
 
     <script src="script.js"></script>

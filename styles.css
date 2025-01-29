@@ -1,17 +1,17 @@
-/* ✅ Fondo del escritorio */
+/* Fondo del escritorio */
 body {
   background: url('Resources/wallpaper.png') no-repeat center center fixed;
-  background-size: cover; /* Escala la imagen para cubrir toda la pantalla */
+  background-size: cover;
   font-family: 'Courier New', Courier, monospace;
   color: white;
   padding: 0;
   margin: 0;
-  width: 100vw; /* Asegura que el fondo cubre todo el ancho */
-  height: 100vh; /* Asegura que el fondo cubre toda la altura */
-  overflow: hidden; /* Evita el scroll */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* ✅ Escritorio con iconos */
+/* Escritorio con iconos */
 #desktop {
   width: 100vw;
   height: 100vh;
@@ -22,7 +22,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* ✅ Iconos del escritorio */
+/* Iconos del escritorio */
 .desktop-icon {
   display: flex;
   flex-direction: column;
@@ -31,6 +31,13 @@ body {
   margin: 15px;
   cursor: pointer;
   text-align: center;
+  transition: transform 0.2s ease;
+  /* Añadir transición suave */
+}
+
+.desktop-icon:hover {
+  transform: scale(1.1);
+  /* Agrandar ligeramente el icono al hacer hover */
 }
 
 .desktop-icon img {
@@ -44,7 +51,15 @@ body {
   margin-top: 5px;
 }
 
-/* ✅ Ventana de la terminal */
+/* Resaltar el idioma actual */
+.active-language {
+  color: yellow !important;
+  /* Amarillo */
+  font-weight: bold;
+  /* Opcional: Hacer el texto más grueso */
+}
+
+/* Ventana de la terminal */
 #terminal-container {
   display: none;
   width: 800px;
@@ -60,7 +75,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* ✅ Barra de título de la terminal */
+/* Barra de título de la terminal */
 .terminal-header {
   background-color: #333;
   color: white;
@@ -71,7 +86,7 @@ body {
   align-items: center;
 }
 
-/* ✅ Icono de terminal y botón de cierre */
+/* Icono de terminal y botón de cierre */
 .terminal-icon {
   font-weight: bold;
 }
@@ -86,7 +101,7 @@ body {
   color: darkred;
 }
 
-/* ✅ Área de salida de la terminal */
+/* Área de salida de la terminal */
 #terminal-output {
   padding: 10px;
   font-size: 16px;
@@ -95,19 +110,27 @@ body {
   overflow-y: auto;
 }
 
-/* ✅ Animación de parpadeo */
+/* Animación de parpadeo */
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
-/* ✅ Aplicar parpadeo a la opción seleccionada */
+/* Aplicar parpadeo a la opción seleccionada */
 .terminal-selected {
   animation: blink 1.5s infinite;
 }
 
-/* ✅ Ventana modal (Visor de Texto) */
+/* Ventana modal (Visor de Texto) */
 #text-viewer {
   position: fixed;
   top: 50%;
@@ -125,7 +148,7 @@ body {
   display: none;
 }
 
-/* ✅ Clases de visibilidad */
+/* Clases de visibilidad */
 .hidden {
   display: none;
 }
