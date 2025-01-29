@@ -3,59 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Jorge Robledo</title>
-    <!-- Enlace al archivo CSS externo -->
+    <title>Escritorio Virtual</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <!-- Dropdown personalizado -->
-        <div class="custom-dropdown">
-            <button class="dropdown-btn" id="current-language-btn" data-lang="es" onclick="toggleDropdown()">Español</button>
-            <ul class="dropdown-content">
-                <li id="lang-option1" onclick="changeLanguage('en')">English</li>
-            </ul>
-        </div>   
-
-        <h1 id="title">Bienvenido a mi portafolio</h1>     
-
-        <div class="menu-btn" id="menu-btn" onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
+    <!-- ✅ Escritorio con icono de Terminal -->
+    <div id="desktop">
+        <div class="desktop-icon" id="terminal-icon">
+            <img src="Resources/icon - terminal.png" alt="Terminal">
+            <p>Terminal</p>
         </div>
-    </header>
-
-    <nav id="nav-menu">
-        <a href="#about" id="nav_menu-option1" onclick="closeMenu()">Sobre mí</a>
-        <a href="#projects" id="nav_menu-option2" onclick="closeMenu()">Proyectos</a>
-        <a href="#contact" id="nav_menu-option3" onclick="closeMenu()">Contacto</a>
-    </nav>    
-
-    <div class="container">
-        <!-- Sección sobre mí -->
-        <section id="about">
-            <h2 id="about-title">Sobre mí</h2>
-            <p id="about-description">Soy Jorge Robledo, desarrollador de videojuegos apasionado por la tecnología y el diseño de experiencias inmersivas...</p>
-        </section>
-
-        <!-- Sección de proyectos -->
-        <section id="projects">
-            <h2 id="projects-title">Proyectos</h2>
-            <div>
-                <img src="URL_DE_TU_IMAGEN" alt="Proyecto 1">
-                <p id="projects-description">Descripción del proyecto 1...</p>
-            </div>
-        </section>
-
-        <!-- Sección de contacto -->
-        <section id="contact">
-            <h2 id="contact-title">Contacto</h2>
-            <p id="contact-description">Email: jorge@example.com</p>
-        </section>
     </div>
 
-    <!-- Enlace al archivo JavaScript externo -->
+    <!-- ✅ Ventana de la terminal (inicialmente oculta) -->
+    <div id="terminal-container" class="hidden">
+        <div class="terminal-header">
+            <span class="terminal-icon">Windows Terminal</span>
+            <span class="close-btn">✕</span>
+        </div>
+        <div id="terminal-output"></div>
+    </div>
+
+    <!-- ✅ Ventana modal para ver archivos -->
+    <div id="text-viewer" class="hidden"></div>
+
     <script src="script.js"></script>
 </body>
 </html>

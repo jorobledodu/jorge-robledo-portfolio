@@ -1,207 +1,123 @@
+/* ✅ Fondo del escritorio */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    overflow-x: hidden; /* Para evitar scroll horizontal */
+  background: url('Resources/wallpaper.png') no-repeat center center fixed;
+  background-size: cover; /* Escala la imagen para cubrir toda la pantalla */
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  padding: 0;
+  margin: 0;
+  width: 100vw; /* Asegura que el fondo cubre todo el ancho */
+  height: 100vh; /* Asegura que el fondo cubre toda la altura */
+  overflow: hidden; /* Evita el scroll */
 }
 
-header {
-    padding: 20px;
-    background-color: #333;
-    color: #f4f4f4;
-    position: relative;
-    display: flex;
-    justify-content: center; /* Centra el contenido del header */
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
+/* ✅ Escritorio con iconos */
+#desktop {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  flex-wrap: wrap;
 }
 
-/* Estilo base para el dropdown */
-.custom-dropdown {
-    position: absolute; /* Posiciona el dropdown a la izquierda del header */
-    left: 20px;
-    display: inline-block;
-    z-index: 1000; /* Menor prioridad que el nav-menu */
+/* ✅ Iconos del escritorio */
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  margin: 15px;
+  cursor: pointer;
+  text-align: center;
 }
 
-/* Botón del dropdown */
-.dropdown-btn {
-    background-color: #444; /* Color del fondo del botón */
-    color: #f4f4f4;
-    padding: 10px;
-    border: 1px solid #333;
-    cursor: pointer;
-    width: 150px;
-    text-align: center; /* Centrar el texto */
-    transition: background-color 0.3s ease;
-    font-size: 14px; /* Asegura un tamaño de fuente estándar */
+.desktop-icon img {
+  width: 50px;
+  height: 50px;
 }
 
-.dropdown-btn:hover {
-    background-color: #00baff; /* Más claro al hacer hover */
-    color: #ff4500;
+.desktop-icon p {
+  font-size: 14px;
+  color: white;
+  margin-top: 5px;
 }
 
-/* Menú desplegable */
-.dropdown-content {
-    display: none; /* El contenido está oculto por defecto */
-    position: absolute;
-    background-color: #444; /* Igual que el fondo del botón */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Añade una sombra */
-    z-index: 1000; /* Menor prioridad que el nav-menu */
-    left: 0; /* Asegura que se alinee bajo el botón */
-    top: 80%; /* Se despliega justo debajo del botón */
-    width: 100%; /* Asegura que el contenido sea del mismo ancho que el botón */
-    border: 1px solid #444; /* Borde del mismo tono que el botón */
-    text-align: center; /* Centrar el texto dentro del contenido */
-    padding: 0; /* Elimina cualquier espacio adicional */
-    font-size: 14px; /* Ajusta el tamaño de la fuente para que coincida con el botón */
+/* ✅ Ventana de la terminal */
+#terminal-container {
+  display: none;
+  width: 800px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-/* Cada opción del dropdown */
-.dropdown-content li {
-    padding: 10px;
-    list-style-type: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Añade transición al color */
-    color: #f4f4f4; /* Texto blanco por defecto */
+/* ✅ Barra de título de la terminal */
+.terminal-header {
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Color cuando pasas el ratón sobre un ítem del dropdown */
-.dropdown-content li:hover {
-    background-color: #666; /* Color de hover ligeramente más claro */
-    color: #ff4500; /* Cambia el color del texto a orangered al hacer hover */
+/* ✅ Icono de terminal y botón de cierre */
+.terminal-icon {
+  font-weight: bold;
 }
 
-/* Mostrar el contenido del dropdown cuando se hace clic */
-.custom-dropdown.show .dropdown-content {
-    display: block; /* Cambia la visibilidad al hacer clic */
+.close-btn {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
 }
 
-/* Centrar el título en el header */
-#title {
-    margin: 0;
-    text-align: center;
-    flex-grow: 1; /* Ocupa el espacio restante para centrar */
-    position: relative;
-    z-index: 1;
+.close-btn:hover {
+  color: darkred;
 }
 
-/* Posicionar el botón hamburguesa a la derecha */
-.menu-btn {
-    position: absolute; /* Posiciona el botón hamburguesa a la derecha del header */
-    right: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 9999; /* Prioridad más alta para que el botón hamburguesa esté encima de todo */
+/* ✅ Área de salida de la terminal */
+#terminal-output {
+  padding: 10px;
+  font-size: 16px;
+  white-space: pre-wrap;
+  height: calc(100% - 30px);
+  overflow-y: auto;
 }
 
-/* Estilos para las barras del botón hamburguesa */
-.menu-btn .bar {
-    width: 35px;
-    height: 4px;
-    background-color: white;
-    position: absolute;
-    transition: all 0.3s ease-in-out;
+/* ✅ Ventana modal (Visor de Texto) */
+#text-viewer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  color: white;
+  border: 2px solid white;
+  padding: 20px;
+  width: 600px;
+  height: 400px;
+  overflow: auto;
+  white-space: pre-wrap;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+  display: none;
 }
 
-/* Posicionamiento inicial de las dos barras */
-.menu-btn .bar:nth-child(1) {
-    top: 12px; /* Coloca la primera barra hacia arriba */
+/* ✅ Clases de visibilidad */
+.hidden {
+  display: none;
 }
 
-.menu-btn .bar:nth-child(2) {
-    top: 24px; /* Coloca la segunda barra hacia abajo */
-}
-
-/* Efecto hover para cambiar el color de las barras */
-.menu-btn:hover .bar {
-    background-color: orangered;
-}
-
-/* Transformaciones cuando el menú está abierto */
-.menu-btn.open .bar:nth-child(1) {
-    transform: rotate(45deg); /* Rota la primera barra 45 grados */
-    top: 18px; /* La centra verticalmente */
-}
-
-.menu-btn.open .bar:nth-child(2) {
-    transform: rotate(-45deg); /* Rota la segunda barra -45 grados */
-    top: 18px; /* La centra verticalmente */
-}
-
-/* Estilos para el menú de navegación */
-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #444;
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 9998; /* Prioridad debajo del botón hamburguesa */
-    justify-content: center;
-    transform: translateX(100%);
-    transition: transform 0.5s ease;
-}
-
-nav.show {
-    transform: translateX(0);
-}
-
-nav a {
-    margin: 20px 0;
-    color: white;
-    text-decoration: none;
-    font-size: 1.5em;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: orangered;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-img {
-    width: 100%;
-    height: auto;
-}
-
-/* Media queries para pantallas pequeñas */
-@media (max-width: 768px) {
-    .menu-btn {
-        right: 15px;
-        width: 35px;
-        height: 35px;
-    }
-
-    .menu-btn .bar {
-        height: 3px;
-    }
-
-    .custom-dropdown {
-        left: 15px;
-    }
+.visible {
+  display: block;
 }
