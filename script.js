@@ -3,7 +3,7 @@ let selectedIndex = 0;
 let inFileView = false;
 let directoryPath = "";
 let typingActive = true;
-let currentLanguage = 'es'; // Idioma por defecto
+let currentLanguage = 'en'; // Idioma predeterminado: inglés
 let data = {}; // Variable global para almacenar los datos del JSON
 
 // Mostrar la terminal al hacer clic en el icono
@@ -37,6 +37,8 @@ async function loadDirectory() {
     await typeWriter(terminal, `PS ${directoryPath}>\n\n`);
     typingActive = false;
     renderFiles();
+    updateIconTexts(); // Actualizar los textos de los iconos al cargar la página
+    highlightCurrentLanguage(); // Resaltar el idioma actual al cargar la página
 }
 
 // Mostrar archivos en la Terminal con parpadeo en la opción seleccionada
@@ -47,7 +49,7 @@ function renderFiles() {
     terminal.innerHTML = `PS ${directoryPath}>\n\n`;
 
     files.forEach((file, index) => {
-        let prefix = index === selectedIndex ? ">_ " : "  ";
+        let prefix = index === selectedIndex ? "> " : "  ";
         let fileClass = index === selectedIndex ? 'terminal-selected' : '';
         terminal.innerHTML += `<span class="${fileClass}">${prefix}${file.date}  ${file.name}</span>\n`;
     });
@@ -55,9 +57,12 @@ function renderFiles() {
     // Añadir instrucciones de navegación en el idioma actual
     const translations = data.translations[currentLanguage];
     terminal.innerHTML += `\n${translations.select_file}\n`;
-    terminal.innerHTML += `\n${translations.navigate}\n`;
     terminal.innerHTML += `${translations.press_enter}\n`;
     terminal.innerHTML += `${translations.press_esc}\n\n`;
+    terminal.innerHTML += `Navigation:\n`;
+    terminal.innerHTML += `Use arrows (W/S ↑/↓) to move.\n`;
+    terminal.innerHTML += `Space/Enter to open the file.\n`;
+    terminal.innerHTML += `ESC to go back.\n`;
 }
 
 // Simulación de escritura de la Terminal
@@ -117,10 +122,11 @@ function closeFile() {
 function changeLanguage(lang) {
     currentLanguage = lang;
     updateIconTexts(); // Actualizar los textos de los iconos
+    highlightCurrentLanguage(); // Resaltar el idioma actual
     renderFiles(); // Actualizar la terminal con el nuevo idioma
 }
 
-// Actualizar los textos de los iconos y resaltar el idioma actual
+// Actualizar los textos de los iconos
 function updateIconTexts() {
     const translations = data.translations[currentLanguage];
 
@@ -128,8 +134,10 @@ function updateIconTexts() {
     document.querySelector("#terminal-icon p").textContent = translations.terminal;
     document.querySelector("#es-icon p").textContent = translations.spanish;
     document.querySelector("#en-icon p").textContent = translations.english;
+}
 
-    // Resaltar el idioma actual en amarillo
+// Resaltar el idioma actual en amarillo
+function highlightCurrentLanguage() {
     document.querySelectorAll(".desktop-icon p").forEach(p => p.classList.remove("active-language"));
     if (currentLanguage === 'es') {
         document.querySelector("#es-icon p").classList.add("active-language");
