@@ -26,6 +26,10 @@ function closeTerminal() {
 
 // Cargar archivos desde el JSON
 async function loadDirectory() {
+    // Aplicar el idioma inglés de manera inmediata
+    applyInitialLanguage();
+
+    // Cargar el archivo JSON
     const response = await fetch("data.json");
     data = await response.json(); // Almacenar los datos en la variable global
     files = data.files;
@@ -37,8 +41,26 @@ async function loadDirectory() {
     await typeWriter(terminal, `PS ${directoryPath}>\n\n`);
     typingActive = false;
     renderFiles();
-    updateIconTexts(); // Actualizar los textos de los iconos al cargar la página
-    highlightCurrentLanguage(); // Resaltar el idioma actual al cargar la página
+    updateIconTexts(); // Actualizar los textos de los iconos con las traducciones
+    highlightCurrentLanguage(); // Resaltar el idioma actual
+}
+
+// Aplicar el idioma inglés de manera inmediata
+function applyInitialLanguage() {
+    const initialTranslations = {
+        terminal: "Terminal",
+        spanish: "Spanish",
+        english: "English",
+    };
+
+    // Actualizar textos de los iconos con las traducciones iniciales
+    document.querySelector("#terminal-icon p").textContent = initialTranslations.terminal;
+    document.querySelector("#es-icon p").textContent = initialTranslations.spanish;
+    document.querySelector("#en-icon p").textContent = initialTranslations.english;
+
+    // Resaltar el idioma actual (inglés)
+    document.querySelectorAll(".desktop-icon p").forEach(p => p.classList.remove("active-language"));
+    document.querySelector("#en-icon p").classList.add("active-language");
 }
 
 // Mostrar archivos en la Terminal con parpadeo en la opción seleccionada
