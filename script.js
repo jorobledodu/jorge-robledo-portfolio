@@ -2,7 +2,8 @@ let files = [];
 let selectedIndex = 0;
 let inFileView = false;
 let directoryPath = "";
-let typingActive = true;
+let typingActive = true; // Solo para la terminal
+let viewerTypingActive = false; // Solo para el visor de texto
 let currentLanguage = 'en'; // Idioma predeterminado: inglés
 let data = {}; // Variable global para almacenar los datos del JSON
 
@@ -26,23 +27,22 @@ function closeTerminal() {
 
 // Cargar archivos desde el JSON
 async function loadDirectory() {
-    // Aplicar el idioma inglés de manera inmediata
     applyInitialLanguage();
-
-    // Cargar el archivo JSON
     const response = await fetch("data.json");
-    data = await response.json(); // Almacenar los datos en la variable global
+    data = await response.json();
     files = data.files;
     directoryPath = data.directory;
 
     const terminal = document.getElementById("terminal-output");
     terminal.innerHTML = "";
-
+    
+    typingActive = true; // Activar animación de la terminal
     await typeWriter(terminal, `PS ${directoryPath}>\n\n`);
     typingActive = false;
+    
     renderFiles();
-    updateIconTexts(); // Actualizar los textos de los iconos con las traducciones
-    highlightCurrentLanguage(); // Resaltar el idioma actual
+    updateIconTexts();
+    highlightCurrentLanguage();
 }
 
 // Aplicar el idioma inglés de manera inmediata
@@ -79,22 +79,21 @@ function renderFiles() {
     // Añadir instrucciones de navegación en el idioma actual
     const translations = data.translations[currentLanguage];
     terminal.innerHTML += `\n${translations.select_file}\n`;
+    terminal.innerHTML += `${translations.navigate}\n`;
     terminal.innerHTML += `${translations.press_enter}\n`;
     terminal.innerHTML += `${translations.press_esc}\n\n`;
-    terminal.innerHTML += `Navigation:\n`;
-    terminal.innerHTML += `Use arrows (W/S ↑/↓) to move.\n`;
-    terminal.innerHTML += `Space/Enter to open the file.\n`;
-    terminal.innerHTML += `ESC to go back.\n`;
 }
 
 // Simulación de escritura de la Terminal
 async function typeWriter(element, text, speed = 50) {
-    typingActive = true;
+    typingActive = true; // Usar la variable de la terminal
     return new Promise(resolve => {
         let i = 0;
         function type() {
-            if (!typingActive) return resolve(); // Detener si la Terminal cambia de estado
-
+            if (!typingActive) { // Verificar con la variable de la terminal
+                resolve();
+                return;
+            }
             if (i < text.length) {
                 element.innerHTML += text.charAt(i);
                 i++;
@@ -115,37 +114,52 @@ function updateSelection(move) {
     renderFiles();
 }
 
-// Abrir el visor de texto correctamente
 function openFile() {
-    if (typingActive || inFileView) return; // Evita abrir si está escribiendo o ya está abierto
+    if (typingActive || inFileView) return;
+
+    viewerTypingActive = true; // Reiniciar el estado de la animación
     inFileView = true;
-    typingActive = false;
-
-    const selectedFile = files[selectedIndex];
     const viewer = document.getElementById("text-viewer");
-
-    viewer.innerHTML = ""; // Resetear contenido antes de escribir
-    viewer.style.display = "block"; // Asegura que el visor se muestre correctamente
-
-    typeWriter(viewer, selectedFile.content[currentLanguage], 30);
+    
+    viewer.innerHTML = ""; // Limpiar contenido previo
+    viewer.style.display = "block";
+    
+    typeWriter(viewer, files[selectedIndex].content[currentLanguage], 30);
 }
 
 // Cerrar el visor y restaurar la navegación
 function closeFile() {
     if (!inFileView) return;
-    inFileView = false; // Restaurar navegación en la Terminal
-    typingActive = false;
-
-    document.getElementById("text-viewer").style.display = "none"; // Oculta la ventana
-    renderFiles(); // Volver a mostrar la lista en la Terminal
+    
+    viewerTypingActive = false; // Detener la animación
+    inFileView = false;
+    document.getElementById("text-viewer").style.display = "none";
+    renderFiles();
 }
 
-// Cambiar idioma
 function changeLanguage(lang) {
     currentLanguage = lang;
-    updateIconTexts(); // Actualizar los textos de los iconos
-    highlightCurrentLanguage(); // Resaltar el idioma actual
-    renderFiles(); // Actualizar la terminal con el nuevo idioma
+    updateIconTexts();
+    highlightCurrentLanguage();
+    renderFiles();
+
+    if (inFileView) {
+        viewerTypingActive = false; // Detener animación actual
+        setTimeout(() => {
+            const viewer = document.getElementById("text-viewer");
+            viewer.innerHTML = ""; // Limpiar sin ocultar
+            viewerTypingActive = true;
+            typeWriter(viewer, files[selectedIndex].content[currentLanguage], 30);
+        }, 10);
+    }
+}
+
+// Función para actualizar el contenido del visor de texto
+function updateTextViewer() {
+    const selectedFile = files[selectedIndex];
+    const viewer = document.getElementById("text-viewer");
+    viewer.innerHTML = ""; // Limpiar contenido previo
+    typeWriter(viewer, selectedFile.content[currentLanguage], 30); // Escribir en el nuevo idioma
 }
 
 // Actualizar los textos de los iconos
