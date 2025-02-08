@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="language-switcher">
+    <button id="langToggle" class="lang-button">
+      <i data-lucide="languages"></i>
+      <span>EN</span>
+    </button>
+  </div>
+
+  <div class="desktop">
+    <div class="icons">
+      <button class="desktop-icon" id="terminalIcon">
+        <i data-lucide="terminal"></i>
+        <span class="i18n" data-i18n="terminal">Terminal</span>
+      </button>
+      <button class="desktop-icon">
+        <i data-lucide="gamepad-2"></i>
+        <span class="i18n" data-i18n="games">Games</span>
+      </button>
+      <button class="desktop-icon">
+        <i data-lucide="monitor-play"></i>
+        <span class="i18n" data-i18n="projects">Projects</span>
+      </button>
+    </div>
+
+    <div class="terminal" id="terminal">
+      <div class="terminal-header">
+        <div class="terminal-title">
+          <i data-lucide="terminal"></i>
+          <span class="i18n" data-i18n="fileExplorer">File Explorer</span>
+        </div>
+        <div class="terminal-buttons">
+          <button class="terminal-btn" id="minimizeBtn">
+            <i data-lucide="minus"></i>
+          </button>
+          <button class="terminal-btn" id="maximizeBtn">
+            <i data-lucide="square"></i>
+          </button>
+          <button class="terminal-btn close" id="closeBtn">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="terminal-content">
+        <div class="instructions i18n" data-i18n="navigationInstructions">
+          Use ↑↓ to navigate, Enter to open folders, Backspace to go back
+        </div>
+        <div class="current-path">📂 /</div>
+        <div class="file-tree" id="fileTree"></div>
+      </div>
+    </div>
+
+    <div class="pdf-viewer" id="pdfViewer">
+      <div class="pdf-header">
+        <div class="pdf-title">
+          <i data-lucide="file-text"></i>
+          <span>about.txt</span>
+        </div>
+        <button class="terminal-btn close" id="closePdfBtn">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <iframe src="Resources/Curriculum-Español-Jorge-Robledo.pdf" title="Resume PDF"></iframe>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
