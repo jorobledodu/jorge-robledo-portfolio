@@ -1,158 +1,368 @@
-/* Fondo del escritorio */
-body {
-  background: url('Resources/wallpaper.png') no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Courier New', Courier, monospace;
-  color: white;
-  padding: 0;
+/* 
+ * Portfolio Website Styles
+ * 
+ * Design Philosophy:
+ * - Use a dark, modern UI with high contrast
+ * - Implement responsive design for multiple screen sizes
+ * - Create a terminal/desktop metaphor with translucent overlays
+ * - Utilize CSS variables for consistent theming
+ */
+
+/* 
+ * Color Palette and Design Tokens
+ * These variables allow easy global theme management
+ */
+ :root {
+  /* Background and Overlay Colors */
+  --bg-overlay: rgba(0, 0, 0, 0.3);     /* Translucent dark overlay */
+  --terminal-bg: rgba(0, 0, 0, 0.9);    /* Dark terminal background */
+  --header-bg: rgb(31, 41, 55);         /* Header and panel background */
+
+  /* Text Colors */
+  --text-primary: rgb(74, 222, 128);    /* Accent green for primary text */
+  --text-secondary: rgb(156, 163, 175); /* Soft gray for secondary text */
+
+  /* Interactive Element Colors */
+  --hover-bg: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+  --selected-bg: rgba(74, 222, 128, 0.3); /* Selection highlight */
+}
+
+/* 
+ * Global Reset and Base Styling
+ * Ensures consistent rendering across browsers
+ */
+* {
   margin: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Escritorio con iconos */
-#desktop {
-  width: 100vw;
-  height: 100vh;
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-image: url('Resources/Images/wallpaper.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  color: white;
+}
+
+/* 
+ * Desktop Container
+ * Provides an overlay effect and full-screen layout
+ */
+.desktop {
+  min-height: 100vh;
+  background: var(--bg-overlay);
+  padding: 2rem;
+}
+
+/* 
+ * Language Switcher
+ * Positioned in the top-right corner with interactive styling
+ */
+.language-switcher {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+.lang-button {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 20px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--hover-bg);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-/* Iconos del escritorio */
+.lang-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 
+ * Desktop Icons
+ * Styling for desktop navigation icons
+ */
+.icons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 6rem;
+}
+
 .desktop-icon {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80px;
-  margin: 15px;
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  text-align: center;
-  transition: transform 0.2s ease;
-  /* Añadir transición suave */
+  transition: background-color 0.2s;
 }
 
 .desktop-icon:hover {
-  transform: scale(1.1);
-  /* Agrandar ligeramente el icono al hacer hover */
+  background: var(--hover-bg);
 }
 
-.desktop-icon img {
-  width: 50px;
-  height: 50px;
+.desktop-icon i {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.25rem;
 }
 
-.desktop-icon p {
-  font-size: 14px;
-  color: white;
-  margin-top: 5px;
+.desktop-icon span {
+  font-size: 0.875rem;
 }
 
-/* Resaltar el idioma actual */
-.active-language {
-  color: yellow !important;
-  /* Amarillo */
-  font-weight: bold;
-  /* Opcional: Hacer el texto más grueso */
-}
-
-/* Ventana de la terminal */
-#terminal-container {
-  display: none;
-  width: 800px;
-  height: 500px;
-  background-color: rgba(0, 0, 0, 0.85);
-  border: 2px solid white;
-  border-radius: 8px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Barra de título de la terminal */
-.terminal-header {
-  background-color: #333;
-  color: white;
-  padding: 5px 10px;
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Icono de terminal y botón de cierre */
-.terminal-icon {
-  font-weight: bold;
-}
-
-.close-btn {
-  cursor: pointer;
-  color: red;
-  font-weight: bold;
-}
-
-.close-btn:hover {
-  color: darkred;
-}
-
-/* Área de salida de la terminal */
-#terminal-output {
-  padding: 10px;
-  font-size: 16px;
-  white-space: pre-wrap;
-  height: calc(100% - 30px);
-  overflow-y: auto;
-}
-
-/* Animación de parpadeo */
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Aplicar parpadeo a la opción seleccionada */
-.terminal-selected {
-  animation: blink 1.5s infinite;
-}
-
-/* Ventana modal (Visor de Texto) */
-#text-viewer {
+/* 
+ * Terminal Styling
+ * Mimics a desktop terminal with window management features
+ */
+.terminal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.95);
+  width: 800px;
+  height: 500px;
+  background: var(--terminal-bg);
+  border-radius: 0.5rem;
+  border: 1px solid rgb(55, 65, 81);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: none;
+}
+
+.terminal.maximized {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform: none;
+  border-radius: 0;
+}
+
+.terminal-header {
+  background: var(--header-bg);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.terminal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-btn {
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.terminal-btn:hover {
+  background: var(--hover-bg);
+}
+
+.terminal-btn.close:hover {
+  background: rgb(239, 68, 68);
   color: white;
-  border: 2px solid white;
-  padding: 20px;
-  width: 600px;
-  height: 400px;
+}
+
+.terminal-content {
+  padding: 1rem;
+  height: calc(100% - 40px);
   overflow: auto;
-  white-space: pre-wrap;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
-  display: none;
+  font-family: monospace;
 }
 
-/* Clases de visibilidad */
-.hidden {
-  display: none;
+.instructions {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
 }
 
-.visible {
-  display: block;
+.current-path {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.file-item {
+  padding: 0.25rem 0.5rem;
+  color: var(--text-primary);
+}
+
+.file-item.selected {
+  background: var(--selected-bg);
+}
+
+.file-item-details {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* 
+ * PDF Viewer
+ * Fullscreen overlay for displaying documents
+ */
+.pdf-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.pdf-viewer.active {
+  display: flex;
+}
+
+.pdf-viewer > div {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 100%;
+  max-width: 56rem;
+  height: 80vh;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.pdf-header {
+  background: var(--header-bg);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdf-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.pdf-viewer iframe {
+  width: 100%;
+  height: calc(100% - 40px);
+  border: none;
+}
+
+/* 
+ * Mobile Navigation
+ * Responsive design for touch-based navigation
+ */
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6); /* Translucent background */
+  display: none;
+  justify-content: space-around;
+  padding: 0.75rem;
+  z-index: 1000;
+  backdrop-filter: blur(5px); /* Slight blur effect */
+}
+
+.mobile-nav button {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-nav button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav button i {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* 
+ * Responsive Design Media Queries
+ * Adjust layout and styling for different screen sizes
+ */
+@media (max-width: 768px) {
+  .desktop {
+    padding: 1rem;
+  }
+
+  .terminal {
+    width: 90%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .terminal.maximized {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+  }
+
+  .terminal-content {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .file-item {
+    padding: 0.25rem;
+  }
+
+  .file-item-details {
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .mobile-nav {
+    display: flex; /* Visible on mobile screens */
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-nav {
+    display: none !important;
+  }
 }

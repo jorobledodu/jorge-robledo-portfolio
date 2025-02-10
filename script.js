@@ -1,221 +1,215 @@
-let files = [];
-let selectedIndex = 0;
-let inFileView = false;
-let directoryPath = "";
-let typingActive = true; // Solo para la terminal
-let viewerTypingActive = false; // Solo para el visor de texto
-let currentLanguage = 'en'; // Idioma predeterminado: inglés
-let data = {}; // Variable global para almacenar los datos del JSON
+// Initialization and Global State Management
+let showTerminal = false;    // Controls terminal visibility
+let selectedIndex = 0;       // Currently selected item in file tree
+let currentPath = [];        // Current navigation path in file tree
+let maximized = false;       // Terminal maximization state
 
-// Mostrar la terminal al hacer clic en el icono
-document.getElementById("terminal-icon").addEventListener("click", () => {
-    document.getElementById("terminal-container").style.display = "block";
-    loadDirectory();
+// DOM Element References
+const terminal = document.getElementById('terminal');
+const fileTree = document.getElementById('fileTree');
+const navIcon = document.getElementById('navIcon');
+const mobileNav = document.getElementById('mobileNav');
+const pdfViewer = document.getElementById('pdfViewer');
+
+// Initialize Lucide icons on page load
+lucide.createIcons();
+
+/**
+ * Toggle terminal visibility and update file tree when opened
+ * @param {boolean} show - Whether to show or hide the terminal
+ */
+function toggleTerminal(show) {
+  showTerminal = show;
+  terminal.style.display = show ? 'block' : 'none';
+
+  if (show) {
+    updateFileTree();  // Refresh file tree content when terminal opens
+  }
+}
+
+/**
+ * Toggle mobile navigation bar visibility
+ * @param {boolean} show - Whether to show or hide mobile navigation
+ */
+function toggleMobileNav(show) {
+  mobileNav.style.display = show ? 'flex' : 'none';
+}
+
+/**
+ * Dynamically check and adjust mobile navigation based on screen size
+ */
+function checkMobileNavigation() {
+  const isMobileScreen = window.innerWidth <= 768;
+
+  // Si es una pantalla pequeña, activar de inicio
+  if (isMobileScreen) {
+    toggleMobileNav(true);
+  }
+}
+
+// Initial mobile navigation setup
+checkMobileNavigation();
+
+// Recheck mobile navigation on window resize
+window.addEventListener('resize', checkMobileNavigation);
+
+// Navigation Icon Click Event
+navIcon.addEventListener('click', () => {
+  const isCurrentlyVisible = mobileNav.style.display === 'flex';
+  toggleMobileNav(!isCurrentlyVisible);
 });
 
-// Cerrar la terminal con el botón de cierre
-document.querySelector(".close-btn").addEventListener("click", () => {
-    closeTerminal();
+/**
+ * Retrieve current items based on navigation path
+ * @returns {Array} Current navigation items
+ */
+function getCurrentItems() {
+  return currentPath.length === 0
+    ? menuStructure
+    : currentPath[currentPath.length - 1].children || [];
+}
+
+/**
+ * Update file tree display with current navigation state
+ */
+function updateFileTree() {
+  const items = getCurrentItems();
+  fileTree.innerHTML = '';
+
+  items.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = `file-item ${index === selectedIndex ? 'selected' : ''}`;
+
+    let prefix = index === selectedIndex ? '▶ ' : '  ';
+    let content = '';
+
+    // Determine item display based on type
+    if (item.type === 'directory') {
+      content = `📁 ${item.name === 'games' ? t('games') : item.name === 'projects' ? t('projects') : item.name}/`;
+    } else if (item.type === 'game') {
+      content = `🎮 ${item.name}`;
+    } else {
+      content = `📄 ${item.name}`;
+    }
+
+    div.textContent = prefix + content;
+
+    // Add detailed information for selected items
+    if (index === selectedIndex) {
+      if (item.type === 'game' && item.game) {
+        const details = document.createElement('div');
+        details.className = 'file-item-details';
+        details.innerHTML = `
+          <div>${t('status')}: ${t(item.game.status)}</div>
+          <div>${t('year')}: ${item.game.year}</div>
+          <div>${t('technologies')}: ${item.game.technologies.join(', ')}</div>
+          <div style="margin-top: 0.25rem">${item.game.description}</div>
+        `;
+        div.appendChild(details);
+      } else if (item.type === 'file' && item.name === 'about.txt') {
+        const viewButton = document.createElement('button');
+        viewButton.className = 'file-item-details';
+        viewButton.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem; color: rgb(134, 239, 172);">
+            <i data-lucide="file-text"></i>
+            ${t('viewResume')}
+          </div>
+        `;
+        viewButton.addEventListener('click', () => {
+          pdfViewer.classList.add('active');
+        });
+        div.appendChild(viewButton);
+        lucide.createIcons();
+      }
+    }
+
+    fileTree.appendChild(div);
+  });
+}
+
+// Keyboard Navigation Event Listener
+document.addEventListener('keydown', (e) => {
+  if (!showTerminal) return;
+
+  const items = getCurrentItems();
+
+  switch (e.key) {
+    case 'ArrowUp':
+      e.preventDefault();
+      selectedIndex = Math.max(0, selectedIndex - 1);
+      updateFileTree();
+      break;
+
+    case 'ArrowDown':
+      e.preventDefault();
+      selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
+      updateFileTree();
+      break;
+
+    case 'Enter':
+      const selectedItem = items[selectedIndex];
+      if (selectedItem?.type === 'directory') {
+        currentPath.push(selectedItem);
+        selectedIndex = 0;
+        updateFileTree();
+      } else if (selectedItem?.type === 'file' && selectedItem.name === 'about.txt') {
+        pdfViewer.classList.add('active');
+      }
+      break;
+
+    case 'Backspace':
+      if (currentPath.length > 0) {
+        currentPath.pop();
+        selectedIndex = 0;
+        updateFileTree();
+      }
+      break;
+
+    case 'Escape':
+      if (pdfViewer.classList.contains('active')) {
+        pdfViewer.classList.remove('active');
+      }
+      break;
+  }
 });
 
-// Función para cerrar la terminal
-function closeTerminal() {
-    document.getElementById("terminal-container").style.display = "none";
-    inFileView = false; // Asegurarse de salir del visor de texto si está abierto
-    typingActive = false;
-}
-
-// Cargar archivos desde el JSON
-async function loadDirectory() {
-    applyInitialLanguage();
-    const response = await fetch("data.json");
-    data = await response.json();
-    files = data.files;
-    directoryPath = data.directory;
-
-    const terminal = document.getElementById("terminal-output");
-    terminal.innerHTML = "";
-    
-    typingActive = true; // Activar animación de la terminal
-    await typeWriter(terminal, `PS ${directoryPath}>\n\n`);
-    typingActive = false;
-    
-    renderFiles();
-    updateIconTexts();
-    highlightCurrentLanguage();
-}
-
-// Aplicar el idioma inglés de manera inmediata
-function applyInitialLanguage() {
-    const initialTranslations = {
-        terminal: "Terminal",
-        spanish: "Spanish",
-        english: "English",
-    };
-
-    // Actualizar textos de los iconos con las traducciones iniciales
-    document.querySelector("#terminal-icon p").textContent = initialTranslations.terminal;
-    document.querySelector("#es-icon p").textContent = initialTranslations.spanish;
-    document.querySelector("#en-icon p").textContent = initialTranslations.english;
-
-    // Resaltar el idioma actual (inglés)
-    document.querySelectorAll(".desktop-icon p").forEach(p => p.classList.remove("active-language"));
-    document.querySelector("#en-icon p").classList.add("active-language");
-}
-
-// Mostrar archivos en la Terminal con parpadeo en la opción seleccionada
-function renderFiles() {
-    if (inFileView) return;
-
-    const terminal = document.getElementById("terminal-output");
-    terminal.innerHTML = `PS ${directoryPath}>\n\n`;
-
-    files.forEach((file, index) => {
-        let prefix = index === selectedIndex ? "> " : "  ";
-        let fileClass = index === selectedIndex ? 'terminal-selected' : '';
-        terminal.innerHTML += `<span class="${fileClass}">${prefix}${file.date}  ${file.name}</span>\n`;
-    });
-
-    // Añadir instrucciones de navegación en el idioma actual
-    const translations = data.translations[currentLanguage];
-    terminal.innerHTML += `\n${translations.select_file}\n`;
-    terminal.innerHTML += `${translations.navigate}\n`;
-    terminal.innerHTML += `${translations.press_enter}\n`;
-    terminal.innerHTML += `${translations.press_esc}\n\n`;
-}
-
-// Simulación de escritura de la Terminal
-async function typeWriter(element, text, speed = 50) {
-    typingActive = true; // Usar la variable de la terminal
-    return new Promise(resolve => {
-        let i = 0;
-        function type() {
-            if (!typingActive) { // Verificar con la variable de la terminal
-                resolve();
-                return;
-            }
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                typingActive = false;
-                resolve();
-            }
-        }
-        type();
-    });
-}
-
-// Navegación en la Terminal
-function updateSelection(move) {
-    if (typingActive || inFileView) return; // Solo moverse si la Terminal está activa
-    selectedIndex = (selectedIndex + move + files.length) % files.length;
-    renderFiles();
-}
-
-function openFile() {
-    if (typingActive || inFileView) return;
-
-    viewerTypingActive = true; // Reiniciar el estado de la animación
-    inFileView = true;
-    const viewer = document.getElementById("text-viewer");
-    
-    viewer.innerHTML = ""; // Limpiar contenido previo
-    viewer.style.display = "block";
-    
-    typeWriter(viewer, files[selectedIndex].content[currentLanguage], 30);
-}
-
-// Cerrar el visor y restaurar la navegación
-function closeFile() {
-    if (!inFileView) return;
-    
-    viewerTypingActive = false; // Detener la animación
-    inFileView = false;
-    document.getElementById("text-viewer").style.display = "none";
-    renderFiles();
-}
-
-function changeLanguage(lang) {
-    currentLanguage = lang;
-    updateIconTexts();
-    highlightCurrentLanguage();
-    renderFiles();
-
-    if (inFileView) {
-        viewerTypingActive = false; // Detener animación actual
-        setTimeout(() => {
-            const viewer = document.getElementById("text-viewer");
-            viewer.innerHTML = ""; // Limpiar sin ocultar
-            viewerTypingActive = true;
-            typeWriter(viewer, files[selectedIndex].content[currentLanguage], 30);
-        }, 10);
-    }
-}
-
-// Función para actualizar el contenido del visor de texto
-function updateTextViewer() {
-    const selectedFile = files[selectedIndex];
-    const viewer = document.getElementById("text-viewer");
-    viewer.innerHTML = ""; // Limpiar contenido previo
-    typeWriter(viewer, selectedFile.content[currentLanguage], 30); // Escribir en el nuevo idioma
-}
-
-// Actualizar los textos de los iconos
-function updateIconTexts() {
-    const translations = data.translations[currentLanguage];
-
-    // Actualizar textos de los iconos
-    document.querySelector("#terminal-icon p").textContent = translations.terminal;
-    document.querySelector("#es-icon p").textContent = translations.spanish;
-    document.querySelector("#en-icon p").textContent = translations.english;
-}
-
-// Resaltar el idioma actual en amarillo
-function highlightCurrentLanguage() {
-    document.querySelectorAll(".desktop-icon p").forEach(p => p.classList.remove("active-language"));
-    if (currentLanguage === 'es') {
-        document.querySelector("#es-icon p").classList.add("active-language");
-    } else if (currentLanguage === 'en') {
-        document.querySelector("#en-icon p").classList.add("active-language");
-    }
-}
-
-// Teclas de navegación
-document.addEventListener("keydown", (event) => {
-    if (typingActive) return; // Evita interacciones mientras escribe
-
-    if (!inFileView) { // Solo permite navegación si el visor de texto NO está abierto
-        if (event.key === "ArrowUp" || event.key.toLowerCase() === "w") {
-            updateSelection(-1); // Moverse hacia arriba
-        } else if (event.key === "ArrowDown" || event.key.toLowerCase() === "s") {
-            updateSelection(1); // Moverse hacia abajo
-        } else if (event.key === "Enter" || event.key === " ") {
-            openFile(); // Abrir archivo seleccionado
-        }
-    }
-
-    // Cerrar la terminal o el visor de texto con ESC
-    if (event.key === "Escape") {
-        if (inFileView) {
-            closeFile(); // Cerrar el visor de texto si está abierto
-        } else {
-            closeTerminal(); // Cerrar la terminal si no hay visor abierto
-        }
-    }
+// Mobile Navigation Button Event Listeners
+document.getElementById('mobileArrowUp').addEventListener('click', () => {
+  selectedIndex = Math.max(0, selectedIndex - 1);
+  updateFileTree();
 });
 
-// Event listeners para cambiar el idioma
-document.getElementById("es-icon").addEventListener("click", () => changeLanguage('es'));
-document.getElementById("en-icon").addEventListener("click", () => changeLanguage('en'));
+document.getElementById('mobileArrowDown').addEventListener('click', () => {
+  selectedIndex = Math.min(getCurrentItems().length - 1, selectedIndex + 1);
+  updateFileTree();
+});
 
-// Cargar el directorio al iniciar la Terminal
-document.addEventListener("DOMContentLoaded", loadDirectory);
+document.getElementById('mobileEnter').addEventListener('click', () => {
+  const selectedItem = getCurrentItems()[selectedIndex];
+  if (selectedItem?.type === 'directory') {
+    currentPath.push(selectedItem);
+    selectedIndex = 0;
+    updateFileTree();
+  }
+});
 
-// Limpiar cookies (opcional)
-document.cookie.split(";").forEach((c) => {
-    document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+document.getElementById('mobileBackspace').addEventListener('click', () => {
+  if (currentPath.length > 0) {
+    currentPath.pop();
+    selectedIndex = 0;
+    updateFileTree();
+  }
+});
+
+// Additional Event Listeners
+document.getElementById('terminalIcon').addEventListener('click', () => toggleTerminal(true));
+document.getElementById('closeBtn').addEventListener('click', () => toggleTerminal(false));
+document.getElementById('minimizeBtn').addEventListener('click', () => toggleTerminal(false));
+document.getElementById('closePdfBtn').addEventListener('click', () => {
+  pdfViewer.classList.remove('active');
+});
+
+// Language Switcher
+document.getElementById('langToggle').addEventListener('click', () => {
+  setLanguage(currentLanguage === 'en' ? 'es' : 'en');
 });
