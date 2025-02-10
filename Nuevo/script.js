@@ -10,7 +10,8 @@ let maximized = false;
 // DOM Elements
 const terminal = document.getElementById('terminal');
 const fileTree = document.getElementById('fileTree');
-const pdfViewer = document.getElementById('pdfViewer');
+// const pdfViewer = document.getElementById('pdfViewer');
+const navIcon = document.getElementById("navIcon");
 
 // Terminal visibility
 function toggleTerminal(show) {
@@ -20,6 +21,21 @@ function toggleTerminal(show) {
     updateFileTree();
   }
 }
+
+// Mostrar/Ocultar la barra de navegación táctil
+function toggleMobileNav(show) {
+  mobileNav.style.display = show ? "flex" : "none";
+}
+
+// Si es móvil, activar la barra de navegación automáticamente
+if (window.innerWidth <= 768) {
+  toggleMobileNav(true);
+}
+
+// Evento del icono de navegación táctil
+navIcon.addEventListener("click", () => {
+  toggleMobileNav(mobileNav.style.display === "none");
+});
 
 // Terminal controls
 document.getElementById('terminalIcon').addEventListener('click', () => toggleTerminal(true));
@@ -143,5 +159,33 @@ document.addEventListener('keydown', (e) => {
         pdfViewer.classList.remove('active');
       }
       break;
+  }
+});
+
+// Funcionalidad de los botones móviles
+document.getElementById("mobileArrowUp").addEventListener("click", () => {
+  selectedIndex = Math.max(0, selectedIndex - 1);
+  updateFileTree();
+});
+
+document.getElementById("mobileArrowDown").addEventListener("click", () => {
+  selectedIndex = Math.min(getCurrentItems().length - 1, selectedIndex + 1);
+  updateFileTree();
+});
+
+document.getElementById("mobileEnter").addEventListener("click", () => {
+  let selectedItem = getCurrentItems()[selectedIndex];
+  if (selectedItem?.type === "directory") {
+    currentPath.push(selectedItem);
+    selectedIndex = 0;
+    updateFileTree();
+  }
+});
+
+document.getElementById("mobileBackspace").addEventListener("click", () => {
+  if (currentPath.length > 0) {
+    currentPath.pop();
+    selectedIndex = 0;
+    updateFileTree();
   }
 });

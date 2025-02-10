@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="styles.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
   <div class="language-switcher">
     <button id="langToggle" class="lang-button">
@@ -21,13 +23,9 @@
         <i data-lucide="terminal"></i>
         <span class="i18n" data-i18n="terminal">Terminal</span>
       </button>
-      <button class="desktop-icon">
-        <i data-lucide="gamepad-2"></i>
-        <span class="i18n" data-i18n="games">Games</span>
-      </button>
-      <button class="desktop-icon">
-        <i data-lucide="monitor-play"></i>
-        <span class="i18n" data-i18n="projects">Projects</span>
+      <button class="desktop-icon" id="navIcon">
+        <i data-lucide="touchpad"></i>
+        <span class="i18n" data-i18n="navigation">Navigation</span>
       </button>
     </div>
 
@@ -70,10 +68,19 @@
       </div>
       <iframe src="Resources/Curriculum-Español-Jorge-Robledo.pdf" title="Resume PDF"></iframe>
     </div>
+
+    <!-- Barra de navegación inferior -->
+    <div class="mobile-nav" id="mobileNav">
+      <button id="mobileArrowUp"><i data-lucide="arrow-up"></i></button>
+      <button id="mobileArrowDown"><i data-lucide="arrow-down"></i></button>
+      <button id="mobileEnter"><i data-lucide="corner-down-left"></i></button>
+      <button id="mobileBackspace"><i data-lucide="corner-up-left"></i></button>
+    </div>
   </div>
 
   <script src="data.js"></script>
   <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
