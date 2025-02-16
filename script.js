@@ -141,7 +141,7 @@ document.addEventListener('keydown', (e) => {
       break;
 
     case 'ArrowDown':
-      e.preventDefault();
+      e.preventDefault(); 
       selectedIndex = Math.min(items.length - 1, selectedIndex + 1);
       updateFileTree();
       break;
