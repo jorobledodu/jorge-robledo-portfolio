@@ -1,0 +1,110 @@
+{
+  "games": [
+    {
+      "title": "Command Console",
+      "description": "Terminal-based puzzle game with programming challenges.",
+      "thumbnail": "Resources/Images/icon-command_console.png",
+      "image": "Resources/Images/command_console.png",
+      "tags": [
+        "Unity",
+        "C#",
+        "AI",
+        "Terminal"
+      ],
+      "links": {
+        "itch": "https://jorodu.itch.io/command-console",
+        "github": "https://github.com/jorodu/command-console"
+      },
+      "gallery": [
+        "Resources/Images/command_console_1.png",
+        "Resources/Images/command_console_2.png"
+      ],
+      "effects": [
+        "neon",
+        "terminal"
+      ]
+    },
+    {
+      "title": "Flafy Bat",
+      "description": "Atmospheric platformer with unique flight mechanics.",
+      "thumbnail": "Resources/Images/icon-flafy_bat.png",
+      "image": "Resources/Images/flafy_bat.png",
+      "tags": [
+        "Unity",
+        "C#",
+        "2D Art",
+        "Sound Design"
+      ],
+      "links": {
+        "itch": "https://jorodu.itch.io/flafy-bat",
+        "github": "https://github.com/jorodu/flafy-bat"
+      },
+      "gallery": [
+        "Resources/Images/flafy_bat_1.png",
+        "Resources/Images/flafy_bat_2.png"
+      ],
+      "effects": [
+        "neon"
+      ]
+    },
+    {
+      "title": "Soulveler",
+      "description": "Immersive exploration game with puzzle elements.",
+      "thumbnail": "Resources/Images/icon-soulveler.png",
+      "image": "Resources/Images/soulveler.png",
+      "tags": [
+        "Unity",
+        "C#",
+        "Narrativa",
+        "Puzzle"
+      ],
+      "links": {
+        "itch": "https://jorodu.itch.io/soulveler",
+        "github": "https://github.com/jorodu/soulveler"
+      },
+      "gallery": [
+        "Resources/Images/soulveler_1.png",
+        "Resources/Images/soulveler_2.png"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "VR Modeling Tool",
+      "description": "3D modeling application with VR integration.",
+      "thumbnail": "Resources/Images/icon-proyecto1.png",
+      "image": "Resources/Images/proyecto1.png",
+      "tags": [
+        "Unreal Engine",
+        "C++",
+        "VR"
+      ],
+      "links": {
+        "github": "https://github.com/jorodu/vr-modeling-tool"
+      },
+      "gallery": [
+        "Resources/Images/proyecto1_1.png",
+        "Resources/Images/proyecto1_2.png"
+      ]
+    },
+    {
+      "title": "Pixel Art Generator",
+      "description": "Procedural pixel art creation tool.",
+      "thumbnail": "Resources/Images/icon-proyecto2.png",
+      "image": "Resources/Images/proyecto2.png",
+      "tags": [
+        "JavaScript",
+        "Canvas API",
+        "Algorithms"
+      ],
+      "links": {
+        "demo": "https://jorodu.com/pixel-art-generator",
+        "github": "https://github.com/jorodu/pixel-art-generator"
+      },
+      "gallery": [
+        "Resources/Images/proyecto2_1.png",
+        "Resources/Images/proyecto2_2.png"
+      ]
+    }
+  ]
+}

@@ -1,360 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Terminal Portfolio</title>
-    <style>
-        :root {
-            --text-color: #00ff00;
-            --bg-color: #000000;
-            --crt-flicker: rgba(0, 255, 0, 0.1);
-        }
-
-        body {
-            margin: 0;
-            padding: 20px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Courier New', monospace;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.6;
-        }
-
-        #terminal-container {
-            display: flex;
-            flex: 1;
-            gap: 20px;
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-        }
-
-        .profile-image-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 20px;
-            border: 2px solid var(--text-color);
-            padding: 4px;
-            position: relative;
-        }
-
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(1.1) contrast(1.2);
-        }
-
-        #profile-panel {
-            width: 300px;
-            border-right: 2px dotted var(--text-color);
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .profile-section {
-            margin-bottom: 24px;
-            padding: 15px;
-            border: 1px solid var(--text-color);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-section:hover {
-            transform: translateX(5px);
-            cursor: pointer;
-        }
-
-        .profile-section-title {
-            font-weight: bold;
-            border-bottom: 2px dotted var(--text-color);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-
-        .skill-bar {
-            height: 4px;
-            background-color: var(--text-color);
-            margin-top: 8px;
-            width: 0;
-            transition: width 1s ease;
-        }
-
-        #terminal {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        #input-line {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        #input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--text-color);
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            min-width: 20px;
-            width: auto;
-            flex: 0 1 auto;
-        }
-
-        @keyframes blink {
-
-            0%,
-            49% {
-                opacity: 1;
-            }
-
-            50%,
-            100% {
-                opacity: 0;
-            }
-        }
-
-        .crt-effect::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: linear-gradient(0deg, var(--crt-flicker) 50%, transparent 50%);
-            animation: crt-scanline 4s linear infinite;
-        }
-
-        .crt-effect::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/gb6lAAAAABJRU5ErkJggg==');
-            opacity: 0.05;
-            z-index: 10;
-        }
-
-        @keyframes crt-scanline {
-            0% {
-                transform: translateY(-100%);
-            }
-
-            100% {
-                transform: translateY(100%);
-            }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Jorge Robledo - Desarrollador de videojuegos y programador especializado en Unity, C# y experiencias interactivas" />
+    <title>Jorge Robledo | Game Developer Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Press+Start+2P&family=Rubik+Bubbles&display=swap" />
+    <link rel="icon" href="Resources/Images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
-    <div id="terminal-container" class="crt-effect">
-        <!-- Panel de Perfil -->
-        <div id="profile-panel">
-            <div class="profile-section">
-                <div class="profile-image-container">
-                    <img src="https://via.placeholder.com/200x200/00FF00/000000?text=JORODU" alt="Profile" class="profile-image">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+
+    <div class="notebook-page">
+        <section id="info-personal">
+            <div class="container">
+                <div class="profile-img-container" aria-label="Foto de perfil con efecto interactivo, click para girar">
+                    <div class="profile-img-inner">
+                        <div class="profile-img-front">
+                            <img src="Resources/Images/perfil-avatar.png" alt="Avatar jorodu" class="profile-img" />
+                        </div>
+                        <div class="profile-img-back">
+                            <img src="Resources/Images/perfil-jorodu.png" alt="Foto Jorge Robledo"
+                                class="profile-img" />
+                        </div>
+                    </div>
                 </div>
-                <div class="profile-section-title">ABOUT_ME</div>
-                <div>> Game Developer & Creative Coder<br>▸ Specializing in WebGL & Interactive Experiences</div>
+                <h1 class="developer-nickname">jorodu</h1>
+                <p class="ubicacion"><i class="fas fa-map-marker-alt"></i> <span data-i18n="location">Valencia,
+                        España</span></p>
+
+                <div class="about-me">
+                    <h2 data-i18n="about-title">Sobre mí</h2>
+                    <p data-i18n="about-description">Desarrollador de videojuegos y programador con pasión por crear
+                        experiencias interactivas únicas.</p>
+                </div>
+
+                <div class="experience">
+                    <h2 data-i18n="experience-title">Experiencia</h2>
+                    <div class="experience-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022 - Presente</div>
+                            <div class="timeline-content">
+                                <h3>Unity Developer</h3>
+                                <p>Game Studio XYZ</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2020 - 2022</div>
+                            <div class="timeline-content">
+                                <h3>Frontend Developer</h3>
+                                <p>Tech Company</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="redes-sociales">
+                    <a href="https://github.com/jorodu" target="_blank" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/jorge-robledo" target="_blank" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/jorodu_dev" target="_blank" aria-label="Twitter"><i
+                            class="fab fa-twitter"></i></a>
+                    <a href="mailto:contacto@jorodu.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+
+                <div class="herramientas">
+                    <h2 data-i18n="tools-title">Herramientas y Tecnologías</h2>
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h3>Game Dev</h3>
+                            <ul class="lista-herramientas">
+                                <li>Unity <span class="skill-level" data-level="90"></span></li>
+                                <li>C# <span class="skill-level" data-level="85"></span></li>
+                                <li>Game Design <span class="skill-level" data-level="80"></span></li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Web</h3>
+                            <ul class="lista-herramientas">
+                                <li>JavaScript <span class="skill-level" data-level="75"></span></li>
+                                <li>HTML/CSS <span class="skill-level" data-level="80"></span></li>
+                                <li>Git <span class="skill-level" data-level="70"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-descarga">
+                    <a href="Resources/PDF/Curriculum-Español-Jorge-Robledo.pdf" class="boton-cv" download
+                        data-i18n="download-cv">
+                        <i class="fas fa-download"></i> Descargar CV
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <nav class="filter-nav">
+                <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Todos</button>
+                <button class="filter-btn" data-filter="game" data-i18n="filter-games">Juegos</button>
+                <button class="filter-btn" data-filter="project" data-i18n="filter-projects">Proyectos</button>
+            </nav>
+
+            <section id="proyectos">
+                <h2 data-i18n="projects-title">Proyectos</h2>
+
+                <div class="search-container">
+                    <input type="text" id="project-search" placeholder="Buscar proyectos..."
+                        data-i18n-placeholder="search-placeholder" aria-label="Buscar proyectos">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+
+                <div class="grid-proyectos">
+                    <!-- Tarjetas generadas dinámicamente por script.js -->
+                </div>
+
+                <div id="no-results" class="no-results-message" style="display: none;" data-i18n="no-results">
+                    No se encontraron resultados que coincidan con tu búsqueda.
+                </div>
+            </section>
+
+            <section id="contacto">
+                <h2 data-i18n="contact-title">Contacto</h2>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name" data-i18n="contact-name">Nombre</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="contact-email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-i18n="contact-message">Mensaje</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="boton-cv" data-i18n="contact-send">Enviar mensaje</button>
+                </form>
+                <div id="form-success" class="form-success" style="display: none;" data-i18n="contact-success">
+                    ¡Mensaje enviado correctamente! Te responderé lo antes posible.
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modal-proyecto" class="modal">
+        <div class="modal-contenido">
+            <span class="close-button" aria-label="Cerrar">&times;</span>
+            <h2 id="modal-titulo-proyecto"></h2>
+
+            <div class="modal-gallery-container">
+                <div class="modal-main-img-container">
+                    <img id="modal-img-proyecto" alt="Imagen del proyecto" />
+                </div>
+                <div id="modal-galeria-proyecto" class="modal-gallery"></div>
             </div>
 
-            <div class="profile-section">
-                <div class="profile-section-title">TECHNICAL_SKILLS</div>
-                <div>> JavaScript (ES6+) [85%]<div class="skill-bar"></div>
-                </div>
-                <div>> WebGL/Three.js [78%]<div class="skill-bar"></div>
-                </div>
-                <div>> Node.js [70%]<div class="skill-bar"></div>
-                </div>
-            </div>
+            <p id="modal-descripcion-proyecto"></p>
 
-            <div class="profile-section">
-                <div class="profile-section-title">PROFESSIONAL_EXPERIENCE</div>
-                <div>> Senior Game Developer @PixelForge<br>▸ 2022-Present | 3 Shipped Titles</div>
-                <div>> WebGL Engineer @TechNova<br>▸ 2020-2022 | 15+ Projects</div>
-            </div>
-        </div>
+            <div class="modal-details">
+                <div class="modal-section">
+                    <h3 data-i18n="modal-technologies">Tecnologías</h3>
+                    <ul id="modal-etiquetas-proyecto" class="etiquetas-tecnologias"></ul>
+                </div>
 
-        <!-- Terminal -->
-        <div id="terminal">
-            <div id="output"></div>
-            <div id="input-line">
-                <span id="prompt">></span>
-                <input type="text" id="input" autofocus>
-                <div id="cursor"></div>
+                <div class="modal-section">
+                    <h3 data-i18n="modal-links">Enlaces</h3>
+                    <div id="modal-links" class="modal-links"></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Sistema de Audio
-        const typeSound = new Audio('sounds/key-type.wav');
-        let lastPlayTime = 0;
-        const soundCooldown = 50;
+    <div id="game-demo-overlay" class="game-demo-overlay">
+        <div class="game-container">
+            <button id="close-game" class="close-game" aria-label="Cerrar demo">
+                <i class="fas fa-times"></i>
+            </button>
+            <iframe id="game-frame" allowfullscreen></iframe>
+        </div>
+    </div>
 
-        // Elementos de la terminal
-        const inputField = document.getElementById('input');
-        const outputDiv = document.getElementById('output');
-        const cursor = document.getElementById('cursor');
+    <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-        // Elemento fantasma para medir texto
-        const ghost = document.createElement('div');
-        ghost.style.position = 'absolute';
-        ghost.style.visibility = 'hidden';
-        ghost.style.whiteSpace = 'pre';
-        ghost.style.font = '16px Courier New';
-        document.body.appendChild(ghost);
-
-        // Función para mantener el foco
-        function maintainFocus() {
-            inputField.focus();
-        }
-
-        // Sistema de Comandos
-        const commands = {
-            about: () => displayAbout(),
-            skills: () => displaySkills(),
-            experience: () => displayExperience(),
-            help: () => displayHelp(),
-            clear: () => clearTerminal()
-        };
-
-        // Funciones de comandos
-        function displayAbout() {
-            displayContent(`
-[[ ABOUT_ME ]]
-Name: John Developer
-Role: Game Developer
-Specialization: Web-based Games
-Tools: Three.js, WebGL, Blender
-            `);
-            maintainFocus();
-        }
-
-        function displaySkills() {
-            displayContent(`
-[[ TECHNICAL_SKILLS ]]
-JavaScript: ■■■■■■■■■■ 85%
-WebGL: ■■■■■■■■■□ 78%
-Node.js: ■■■■■■■□□□ 70%
-            `);
-            maintainFocus();
-        }
-
-        function displayExperience() {
-            displayContent(`
-[[ PROFESSIONAL_EXPERIENCE ]]
-2022-Present: Senior Game Developer @PixelForge
-- Led development of 3 AAA browser games
-- Implemented WebGL rendering pipeline
-
-2020-2022: WebGL Engineer @TechNova
-- Developed 15+ interactive experiences
-- Optimized 3D rendering performance
-            `);
-            maintainFocus();
-        }
-
-        function displayHelp() {
-            displayContent(`
-[[ AVAILABLE COMMANDS ]]
-about    - Show professional info
-skills   - Display technical skills
-experience - Show work history
-clear    - Clean terminal
-help     - Show this message
-            `);
-            maintainFocus();
-        }
-
-        function clearTerminal() {
-            outputDiv.innerHTML = '<div class="terminal-line">Terminal OS v1.0.3 - Type HELP for command list</div>';
-            outputDiv.scrollTop = outputDiv.scrollHeight;
-            maintainFocus();
-        }
-
-        // Ajustar tamaño del input y posición del cursor
-        function resizeInput() {
-            ghost.textContent = inputField.value || ' ';
-            const width = ghost.offsetWidth + 2;
-            inputField.style.width = `${width}px`;
-            cursor.style.transform = `translateX(${width}px)`;
-        }
-
-        // Eventos del input
-        inputField.addEventListener('input', () => {
-            resizeInput();
-            if (inputField.value.length === 0) cursor.style.transform = 'translateX(0px)';
-        });
-
-        inputField.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                processCommand(inputField.value);
-                inputField.value = '';
-                resizeInput();
-                maintainFocus();
-            }
-        });
-
-        // Sonido al escribir
-        inputField.addEventListener('keydown', (e) => {
-            if (!e.repeat && Date.now() - lastPlayTime > soundCooldown && e.key.length === 1) {
-                typeSound.currentTime = 0;
-                typeSound.volume = 0.3;
-                typeSound.play().catch(() => { });
-                lastPlayTime = Date.now();
-            }
-        });
-
-        // Procesamiento de comandos
-        function processCommand(cmd) {
-            const command = cmd.toLowerCase().trim();
-            if (commands[command]) {
-                commands[command]();
-            } else {
-                displayContent(`[[ ERROR: Unknown command '${command}' ]]`);
-            }
-        }
-
-        // Mostrar contenido
-        function displayContent(text) {
-            outputDiv.innerHTML += `<div class="terminal-line">${text.replace(/\n/g, '<br>')}</div>`;
-            outputDiv.scrollTop = outputDiv.scrollHeight;
-        }
-
-        // Inicialización
-        window.addEventListener('load', () => {
-            clearTerminal();
-            maintainFocus();
-            resizeInput();
-
-            document.querySelectorAll('.skill-bar').forEach(bar => {
-                const width = bar.parentElement.textContent.match(/\[(\d+)%\]/)[1];
-                bar.style.width = `${width}%`;
-            });
-        });
-
-        function maintainFocus() {
-            inputField.focus();
-        }
-
-        // Llamar a maintainFocus en más eventos si es necesario
-        inputField.addEventListener('blur', maintainFocus);
-    </script>
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
