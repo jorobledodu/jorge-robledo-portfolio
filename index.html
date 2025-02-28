@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-        content="Jorge Robledo - Desarrollador de videojuegos y programador especializado en Unity, C# y experiencias interactivas" />
+        content="Jorge Robledo - Desarrollador de videojuegos y programador especializado en Unity, C#, y experiencias interactivas" />
     <title>Jorge Robledo | Game Developer Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -31,22 +31,54 @@
                 <div class="profile-img-container" aria-label="Foto de perfil con efecto interactivo, click para girar">
                     <div class="profile-img-inner">
                         <div class="profile-img-front">
-                            <img src="Resources/Images/perfil-avatar.png" alt="Avatar jorodu" class="profile-img" />
+                            <img src="Resources/Images/perfil-avatar.png" alt="Avatar robledodu" class="profile-img"
+                                loading="lazy" />
                         </div>
                         <div class="profile-img-back">
-                            <img src="Resources/Images/perfil-jorodu.png" alt="Foto Jorge Robledo"
-                                class="profile-img" />
+                            <img src="Resources/Images/perfil-jorodu.png" alt="Foto Jorge Robledo" class="profile-img"
+                                loading="lazy" />
                         </div>
                     </div>
                 </div>
-                <h1 class="developer-nickname">jorodu</h1>
+                <h1 class="developer-nickname"><span id="developer-nickname-text">robledodu</span></h1>
                 <p class="ubicacion"><i class="fas fa-map-marker-alt"></i> <span data-i18n="location">Valencia,
                         España</span></p>
+
+                <div class="redes-sociales">
+                    <a href="https://github.com/jorodu" target="_blank" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/jorge-robledo" target="_blank" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://jorodu.itch.io" target="_blank" aria-label="Itch.io"><i
+                            class="fab fa-itch-io"></i></a>
+                    <a href="https://twitter.com/jorodu_dev" target="_blank" aria-label="Twitter"><i
+                            class="fab fa-twitter"></i></a>
+                </div>
+
+                <div class="contacto-email">
+                    <button id="copy-email" class="copy-email-btn" aria-label="Copiar email">
+                        <i class="fas fa-copy"></i> contacto@jorodu.com
+                        <span class="tooltip">¡Copiado!</span>
+                    </button>
+                </div>
+
+                <div class="cv-descarga">
+                    <a href="Resources/PDF/Curriculum-Español-Jorge-Robledo.pdf" class="boton-cv" download
+                        data-i18n="download-cv">
+                        <i class="fas fa-download"></i> <span class="visually-hidden">Descargar</span> CV
+                    </a>
+                </div>
 
                 <div class="about-me">
                     <h2 data-i18n="about-title">Sobre mí</h2>
                     <p data-i18n="about-description">Desarrollador de videojuegos y programador con pasión por crear
                         experiencias interactivas únicas.</p>
+                </div>
+
+                <div class="herramientas">
+                    <h2 data-i18n="tools-title">Herramientas y Tecnologías</h2>
+                    <ul class="etiquetas-tecnologias">
+                    </ul>
                 </div>
 
                 <div class="experience">
@@ -56,56 +88,31 @@
                             <div class="timeline-date">2022 - Presente</div>
                             <div class="timeline-content">
                                 <h3>Unity Developer</h3>
-                                <p>Game Studio XYZ</p>
+                                <p class="timeline-company">Game Studio XYZ</p>
+                                <p class="timeline-description">Desarrollo de videojuegos con Unity y C#. Implementación
+                                    de mecánicas de juego, sistemas de IA y optimización de rendimiento.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-date">2020 - 2022</div>
                             <div class="timeline-content">
                                 <h3>Frontend Developer</h3>
-                                <p>Tech Company</p>
+                                <p class="timeline-company">Tech Company</p>
+                                <p class="timeline-description">Desarrollo de aplicaciones web utilizando JavaScript,
+                                    HTML y CSS. Implementación de interfaces de usuario responsivas y optimización de
+                                    rendimiento.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2018 - 2020</div>
+                            <div class="timeline-content">
+                                <h3>Junior Web Developer</h3>
+                                <p class="timeline-company">Digital Solutions</p>
+                                <p class="timeline-description">Desarrollo y mantenimiento de sitios web corporativos.
+                                    Colaboración en proyectos de comercio electrónico y aplicaciones web.</p>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="redes-sociales">
-                    <a href="https://github.com/jorodu" target="_blank" aria-label="GitHub"><i
-                            class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/jorge-robledo" target="_blank" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="https://twitter.com/jorodu_dev" target="_blank" aria-label="Twitter"><i
-                            class="fab fa-twitter"></i></a>
-                    <a href="mailto:contacto@jorodu.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-
-                <div class="herramientas">
-                    <h2 data-i18n="tools-title">Herramientas y Tecnologías</h2>
-                    <div class="skills-container">
-                        <div class="skill-category">
-                            <h3>Game Dev</h3>
-                            <ul class="lista-herramientas">
-                                <li>Unity <span class="skill-level" data-level="90"></span></li>
-                                <li>C# <span class="skill-level" data-level="85"></span></li>
-                                <li>Game Design <span class="skill-level" data-level="80"></span></li>
-                            </ul>
-                        </div>
-                        <div class="skill-category">
-                            <h3>Web</h3>
-                            <ul class="lista-herramientas">
-                                <li>JavaScript <span class="skill-level" data-level="75"></span></li>
-                                <li>HTML/CSS <span class="skill-level" data-level="80"></span></li>
-                                <li>Git <span class="skill-level" data-level="70"></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cv-descarga">
-                    <a href="Resources/PDF/Curriculum-Español-Jorge-Robledo.pdf" class="boton-cv" download
-                        data-i18n="download-cv">
-                        <i class="fas fa-download"></i> Descargar CV
-                    </a>
                 </div>
             </div>
         </section>
@@ -118,20 +125,11 @@
             </nav>
 
             <section id="proyectos">
-                <h2 data-i18n="projects-title">Proyectos</h2>
-
-                <div class="search-container">
-                    <input type="text" id="project-search" placeholder="Buscar proyectos..."
-                        data-i18n-placeholder="search-placeholder" aria-label="Buscar proyectos">
-                    <i class="fas fa-search search-icon"></i>
-                </div>
-
                 <div class="grid-proyectos">
-                    <!-- Tarjetas generadas dinámicamente por script.js -->
                 </div>
 
                 <div id="no-results" class="no-results-message" style="display: none;" data-i18n="no-results">
-                    No se encontraron resultados que coincidan con tu búsqueda.
+                    No se encontraron resultados.
                 </div>
             </section>
 
@@ -150,7 +148,9 @@
                         <label for="message" data-i18n="contact-message">Mensaje</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="boton-cv" data-i18n="contact-send">Enviar mensaje</button>
+                    <button type="submit" class="boton-cv" data-i18n="contact-send">
+                        <i class="fas fa-paper-plane"></i> <span class="visually-hidden">Enviar</span> Mensaje
+                    </button>
                 </form>
                 <div id="form-success" class="form-success" style="display: none;" data-i18n="contact-success">
                     ¡Mensaje enviado correctamente! Te responderé lo antes posible.
@@ -159,16 +159,17 @@
         </main>
     </div>
 
-    <div id="modal-proyecto" class="modal">
+    <div id="modal-proyecto" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo-proyecto">
         <div class="modal-contenido">
             <span class="close-button" aria-label="Cerrar">&times;</span>
             <h2 id="modal-titulo-proyecto"></h2>
 
             <div class="modal-gallery-container">
                 <div class="modal-main-img-container">
-                    <img id="modal-img-proyecto" alt="Imagen del proyecto" />
+                    <img id="modal-img-proyecto" alt="Imagen del proyecto" loading="lazy" />
                 </div>
-                <div id="modal-galeria-proyecto" class="modal-gallery"></div>
+                <div id="modal-galeria-proyecto" class="modal-gallery">
+                </div>
             </div>
 
             <p id="modal-descripcion-proyecto"></p>
@@ -176,18 +177,20 @@
             <div class="modal-details">
                 <div class="modal-section">
                     <h3 data-i18n="modal-technologies">Tecnologías</h3>
-                    <ul id="modal-etiquetas-proyecto" class="etiquetas-tecnologias"></ul>
+                    <ul id="modal-etiquetas-proyecto" class="etiquetas-tecnologias">
+                    </ul>
                 </div>
 
                 <div class="modal-section">
                     <h3 data-i18n="modal-links">Enlaces</h3>
-                    <div id="modal-links" class="modal-links"></div>
+                    <div id="modal-links" class="modal-links">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="game-demo-overlay" class="game-demo-overlay">
+    <div id="game-demo-overlay" class="game-demo-overlay" role="dialog" aria-modal="true">
         <div class="game-container">
             <button id="close-game" class="close-game" aria-label="Cerrar demo">
                 <i class="fas fa-times"></i>

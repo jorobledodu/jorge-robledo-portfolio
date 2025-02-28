@@ -19,7 +19,13 @@ const translations = {
         "contact-send": "Enviar mensaje",
         "contact-success": "¡Mensaje enviado! Te responderé pronto.",
         "modal-technologies": "Tecnologías",
-        "modal-links": "Enlaces"
+        "modal-links": "Enlaces",
+        "load-error": "Error al cargar los datos del portfolio. Por favor, inténtalo de nuevo más tarde.",
+        "alert-complete-fields": "Por favor, completa todos los campos.",
+        "alert-valid-email": "Por favor, introduce un email válido.",
+        "playable": "Jugable",
+        "not-playable": "No jugable",
+        "demo-unavailable": "Demo no disponible en este momento."
     },
     "en": {
         "location": "Valencia, Spain",
@@ -41,6 +47,12 @@ const translations = {
         "contact-send": "Send Message",
         "contact-success": "Message sent! I'll respond ASAP.",
         "modal-technologies": "Technologies",
-        "modal-links": "Links"
+        "modal-links": "Links",
+        "load-error": "Error loading portfolio data. Please try again later.",
+        "alert-complete-fields": "Please complete all fields.",
+        "alert-valid-email": "Please enter a valid email.",
+        "playable": "Playable",
+        "not-playable": "Not playable",
+        "demo-unavailable": "Demo not available at this time."
     }
 };

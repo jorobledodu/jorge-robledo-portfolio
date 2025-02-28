@@ -3,68 +3,128 @@
     {
       "title": "Command Console",
       "description": "Terminal-based puzzle game with programming challenges.",
-      "thumbnail": "Resources/Images/icon-command_console.png",
-      "image": "Resources/Images/command_console.png",
+      "thumbnail": "https://placehold.co/200x200/png?text=Command+Console+Icon",
+      "image": "https://placehold.co/800x600/png?text=Command+Console+Screenshot",
+      "releaseDate": "2023",
+      "playable": true,
       "tags": [
-        "Unity",
-        "C#",
-        "AI",
-        "Terminal"
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "AI",
+          "iconClass": "fas fa-robot"
+        },
+        {
+          "name": "Terminal",
+          "iconClass": "fas fa-terminal"
+        }
       ],
       "links": {
-        "itch": "https://jorodu.itch.io/command-console",
+        "itch": "https://itch.io/embed-upload/12228899?color=444444",
         "github": "https://github.com/jorodu/command-console"
       },
       "gallery": [
-        "Resources/Images/command_console_1.png",
-        "Resources/Images/command_console_2.png"
+        "https://placehold.co/400x300/png?text=Command+Console+Gallery+1",
+        "https://placehold.co/400x300/png?text=Command+Console+Gallery+2"
       ],
       "effects": [
         "neon",
         "terminal"
+      ],
+      "altThumbnail": "Icono del juego Command Console, mostrando una ventana de terminal estilizada.",
+      "altImage": "Captura de pantalla del juego Command Console, con una interfaz de terminal y texto de código.",
+      "altGallery": [
+        "Captura de pantalla del juego Command Console mostrando un desafío de programación.",
+        "Captura de pantalla de Command Console mostrando la interfaz principal del juego."
       ]
     },
     {
       "title": "Flafy Bat",
       "description": "Atmospheric platformer with unique flight mechanics.",
-      "thumbnail": "Resources/Images/icon-flafy_bat.png",
-      "image": "Resources/Images/flafy_bat.png",
+      "thumbnail": "https://placehold.co/200x200/png?text=Flafy+Bat+Icon",
+      "image": "https://placehold.co/800x600/png?text=Flafy+Bat+Screenshot",
+      "releaseDate": "2022",
+      "playable": true,
       "tags": [
-        "Unity",
-        "C#",
-        "2D Art",
-        "Sound Design"
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "2D Art",
+          "iconClass": "fas fa-paint-brush"
+        },
+        {
+          "name": "Sound Design",
+          "iconClass": "fas fa-volume-up"
+        }
       ],
       "links": {
         "itch": "https://jorodu.itch.io/flafy-bat",
         "github": "https://github.com/jorodu/flafy-bat"
       },
       "gallery": [
-        "Resources/Images/flafy_bat_1.png",
-        "Resources/Images/flafy_bat_2.png"
+        "https://placehold.co/400x300/png?text=Flafy+Bat+Gallery+1",
+        "https://placehold.co/400x300/png?text=Flafy+Bat+Gallery+2"
       ],
       "effects": [
         "neon"
+      ],
+      "altThumbnail": "Icono del juego Flafy Bat, mostrando un murciélago estilizado con un fondo neón.",
+      "altImage": "Captura de pantalla de Flafy Bat, mostrando al personaje principal volando en un entorno oscuro.",
+      "altGallery": [
+        "Captura de pantalla de Flafy Bat durante un nivel con obstáculos.",
+        "Captura de pantalla mostrando la estética de Flafy Bat, con colores brillantes y un fondo oscuro."
       ]
     },
     {
       "title": "Soulveler",
       "description": "Immersive exploration game with puzzle elements.",
-      "thumbnail": "Resources/Images/icon-soulveler.png",
-      "image": "Resources/Images/soulveler.png",
+      "thumbnail": "https://placehold.co/200x200/png?text=Soulveler+Icon",
+      "image": "https://placehold.co/800x600/png?text=Soulveler+Screenshot",
+      "releaseDate": "En desarrollo",
+      "playable": false,
       "tags": [
-        "Unity",
-        "C#",
-        "Narrativa",
-        "Puzzle"
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "Narrativa",
+          "iconClass": "fas fa-book"
+        },
+        {
+          "name": "Puzzle",
+          "iconClass": "fas fa-puzzle-piece"
+        }
       ],
       "links": {
         "itch": "https://jorodu.itch.io/soulveler",
         "github": "https://github.com/jorodu/soulveler"
       },
       "gallery": [
-        "Resources/Images/soulveler_1.png",
-        "Resources/Images/soulveler_2.png"
+        "https://placehold.co/400x300/png?text=Soulveler+Gallery+1",
+        "https://placehold.co/400x300/png?text=Soulveler+Gallery+2"
+      ],
+      "altThumbnail": "Icono del juego Soulveler, mostrando un paisaje etéreo y un personaje explorando.",
+      "altImage": "Captura de pantalla de Soulveler, mostrando un entorno misterioso y un personaje jugador.",
+      "altGallery": [
+        "Captura de pantalla del juego Soulveler, con un puzle ambiental.",
+        "Captura de pantalla mostrando la atmósfera inmersiva de Soulveler."
       ]
     }
   ],
@@ -72,38 +132,70 @@
     {
       "title": "VR Modeling Tool",
       "description": "3D modeling application with VR integration.",
-      "thumbnail": "Resources/Images/icon-proyecto1.png",
-      "image": "Resources/Images/proyecto1.png",
+      "thumbnail": "https://placehold.co/200x200/png?text=VR+Modeling+Tool+Icon",
+      "image": "https://placehold.co/800x600/png?text=VR+Modeling+Tool+Screenshot",
+      "releaseDate": "2023",
       "tags": [
-        "Unreal Engine",
-        "C++",
-        "VR"
+        {
+          "name": "Unreal Engine",
+          "iconClass": "fab fa-unreal-engine"
+        },
+        {
+          "name": "C++",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "VR",
+          "iconClass": "fas fa-vr-cardboard"
+        }
       ],
       "links": {
         "github": "https://github.com/jorodu/vr-modeling-tool"
       },
       "gallery": [
-        "Resources/Images/proyecto1_1.png",
-        "Resources/Images/proyecto1_2.png"
+        "https://placehold.co/400x300/png?text=VR+Modeling+Tool+Gallery+1",
+        "https://placehold.co/400x300/png?text=VR+Modeling+Tool+Gallery+2"
+      ],
+      "altThumbnail": "Icono del proyecto VR Modeling Tool, que muestra unas gafas de realidad virtual y herramientas de modelado.",
+      "altImage": "Captura de pantalla de la aplicación VR Modeling Tool, con un modelo 3D y una interfaz de usuario VR.",
+      "altGallery": [
+        "Captura de pantalla mostrando la interacción con el modelo 3D en VR Modeling Tool.",
+        "Captura de pantalla de la interfaz de usuario de VR Modeling Tool en un entorno de realidad virtual."
       ]
     },
     {
       "title": "Pixel Art Generator",
       "description": "Procedural pixel art creation tool.",
-      "thumbnail": "Resources/Images/icon-proyecto2.png",
-      "image": "Resources/Images/proyecto2.png",
+      "thumbnail": "https://placehold.co/200x200/png?text=Pixel+Art+Generator+Icon",
+      "image": "https://placehold.co/800x600/png?text=Pixel+Art+Generator+Screenshot",
+      "releaseDate": "2022",
       "tags": [
-        "JavaScript",
-        "Canvas API",
-        "Algorithms"
+        {
+          "name": "JavaScript",
+          "iconClass": "fab fa-js"
+        },
+        {
+          "name": "Canvas API",
+          "iconClass": "fas fa-canvas-gauge"
+        },
+        {
+          "name": "Algorithms",
+          "iconClass": "fas fa-brain"
+        }
       ],
       "links": {
         "demo": "https://jorodu.com/pixel-art-generator",
         "github": "https://github.com/jorodu/pixel-art-generator"
       },
       "gallery": [
-        "Resources/Images/proyecto2_1.png",
-        "Resources/Images/proyecto2_2.png"
+        "https://placehold.co/400x300/png?text=Pixel+Art+Generator+Gallery+1",
+        "https://placehold.co/400x300/png?text=Pixel+Art+Generator+Gallery+2"
+      ],
+      "altThumbnail": "Icono del proyecto Pixel Art Generator, mostrando un ejemplo de pixel art generado proceduralmente.",
+      "altImage": "Captura de pantalla de la herramienta Pixel Art Generator, mostrando la interfaz y un ejemplo de arte generado.",
+      "altGallery": [
+        "Captura de pantalla mostrando diferentes resultados generados con Pixel Art Generator.",
+        "Captura de pantalla de la interfaz de usuario de Pixel Art Generator."
       ]
     }
   ]
