@@ -1,4 +1,7 @@
 // script.js
+// Import SVG icons
+import svgIcons from './svg-icons.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
     // Elementos del DOM
     const DOM = {
@@ -43,15 +46,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const allSkills = [
         { name: "Unity", iconClass: "fab fa-unity", level: 90 },
         { name: "C#", iconClass: "fas fa-code", level: 85 },
-        { name: "Game Design", iconClass: "fas fa-gamepad", level: 80 }, // Ejemplo de icono
-        { name: "JavaScript", iconClass: "fab fa-js", level: 75 },
-        { name: "HTML/CSS", iconClass: "fab fa-html5", level: 80 },  // Puedes usar fa-html5 o fa-css3-alt
-        { name: "Git", iconClass: "fab fa-git", level: 70 },
-        { name: "Unreal Engine", iconClass: "fab fa-unreal-engine", level: 60 },
-        { name: "C++", iconClass: "fas fa-code", level: 65 },
-        { name: "VR", iconClass: "fas fa-vr-cardboard", level: 70 },
-        { name: "Canvas API", iconClass: "fas fa-canvas-gauge", level: 65 },
-        { name: "Algorithms", iconClass: "fas fa-brain", level: 75 }
+        { name: "HTML", iconClass: "fab fa-html5", level: 80 },
+        { name: "CSS", iconClass: "fab fa-css3-alt", level: 80 },
+        { name: "GitHub", iconClass: "fab fa-github", level: 70 },
+        { name: "Unreal Engine", iconClass: "fab fa-unreal-engine", level: 60 }
     ];
 
     // Cargar datos del portfolio
@@ -231,7 +229,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Llenar etiquetas (tags)
         project.tags.forEach(tag => {
             const li = document.createElement('li');
-            li.innerHTML = `<i class="${tag.iconClass}"></i> ${tag.name}`;
+            const tagKey = tag.name.toLowerCase().replace(/[\s\/]+/g, '');
+            
+            if (svgIcons[tagKey]) {
+                li.innerHTML = `${svgIcons[tagKey]} ${tag.name}`;
+            } else {
+                li.innerHTML = `<i class="${tag.iconClass}"></i> ${tag.name}`;
+            }
+            
             DOM.modalTags.appendChild(li);
         });
 
@@ -270,7 +275,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Creamos las etiquetas de las herramientas
         allSkills.forEach(skill => {
             const li = document.createElement('li');
-            li.innerHTML = `<i class="${skill.iconClass}"></i> ${skill.name}`;
+            
+            // Usar SVG icons de SVGL si están disponibles, sino usar Font Awesome
+            const skillKey = skill.name.toLowerCase().replace(/[\s\/]+/g, '');
+            if (svgIcons[skillKey]) {
+                li.innerHTML = `${svgIcons[skillKey]} ${skill.name}`;
+            } else {
+                li.innerHTML = `<i class="${skill.iconClass}"></i> ${skill.name}`;
+            }
+            
             DOM.herramientasContainer.appendChild(li);
         });
     }

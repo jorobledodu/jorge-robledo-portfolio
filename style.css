@@ -50,7 +50,7 @@ body {
     display: grid;
     grid-template-columns: 350px 1fr;
     gap: 2rem;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     background: var(--current-card-bg);
     padding: 2rem;
@@ -396,7 +396,10 @@ body.dark-theme {
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-dark);
 }
-
+.etiquetas-tecnologias li svg,
+.etiquetas-tecnologias li i {
+    margin-right: 0.5rem;
+}
 /* Habilidades */
 .skill-level {
     height: 8px;
@@ -467,7 +470,6 @@ body.dark-theme {
     background: rgba(0, 0, 0, 0.9);
     z-index: 1100;
     overflow: hidden;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
