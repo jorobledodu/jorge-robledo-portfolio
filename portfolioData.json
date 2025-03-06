@@ -1,10 +1,85 @@
 {
-  "games": [
+  "items": [
     {
+      "type": "project",
       "title": "Command Console",
-      "description": "Terminal-based puzzle game with programming challenges.",
-      "thumbnail": "https://placehold.co/200x200/png?text=Command+Console+Icon",
-      "image": "https://placehold.co/800x600/png?text=Command+Console+Screenshot",
+      "description": "Esta consola, integrada en una escena 2D simple, permite la manipulación en tiempo real de un valor numérico mediante comandos de texto. Ideal para experimentar y comprender cómo los cambios afectan a un elemento central, esta herramienta facilita la exploración de conceptos de programación y el diseño de juegos de forma interactiva y directa. Además, ofrece una valiosa ayuda en la depuración del proyecto, permitiendo a los desarrolladores modificar valores y probar funcionalidades de manera rápida y eficiente para identificar y corregir errores.",
+      "thumbnail": "Resources/Images/command_console-icon.png",
+      "releaseDate": "En Desarrollo",
+      "playable": true,
+      "tags": [
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        }
+      ],
+      "links": {
+        "demo": "https://itch.io/embed-upload/12228899?color=444444",
+        "itch": "https://robledodu.itch.io/in-game-command-console",
+        "github": "https://github.com/jorodu/command-console"
+      },
+      "gallery": [
+        "Resources/Videos/command_console.mp4",
+        "Resources/Images/command_console-icon.png",
+        "Resources/Images/command_console-1.png"
+      ],
+      "effects": [
+        "neon",
+        "terminal"
+      ],
+      "altThumbnail": "Video del proyecto Command Console.",
+      "altGallery": [
+        "Video del proyecto Command Console.",
+        "Captura de pantalla del proyecto Command Console.",
+        "Captura de pantalla del proyecto Command Console."
+      ]
+    },
+    {
+      "type": "project",
+      "title": "TFG - Diseño y desarrollo de la mecánica principal de un FPS",
+      "description": "Este Trabajo de Fin de Grado se enfoca en el diseño y desarrollo de una mecánica FPS, buscando integrar armas tradicionales, habilidades mágicas y reacciones dinámicas entre enemigos. El objetivo principal es establecer un prototipo funcional y escalable, superando las limitaciones de un proyecto previo demasiado ambicioso. Para lograrlo, se implementó un diseño modular utilizando ScriptableObjects y estructuras desacopladas, empleando Unity y Cinemachine para una experiencia inmersiva. El resultado clave es un sistema de reacciones con interacciones como 'Sobrecarga', 'Electrocución' y 'Congelación', validado mediante una consola de comandos personalizada y pruebas iterativas. Este enfoque garantiza un sistema de juego sólido y funcional, sentando las bases para futuros desarrollos más extensos.",
+      "thumbnail": "Resources/Videos/mecanicas_FPS.mp4",
+      "releaseDate": "2024",
+      "playable": true,
+      "tags": [
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "3D",
+          "iconClass": "fas fa-cube"
+        }
+      ],
+      "links": {
+        "itch": "https://robledodu.itch.io/mecanica-fps-tfg-jorge-robledo",
+        "github": "https://github.com/jorodu/command-console"
+      },
+      "gallery": [
+        "Resources/Videos/mecanicas_FPS.mp4"
+      ],
+      "effects": [
+        "neon",
+        "terminal"
+      ],
+      "altThumbnail": "Video del proyecto TFG - Diseño y desarrollo de la mecánica principal de un FPS.",
+      "altGallery": [
+        "Video del proyecto TFG - Diseño y desarrollo de la mecánica principal de un FPS."
+      ]
+    },
+    {
+      "type": "game",
+      "title": "Magic Shooter",
+      "description": "Defiende la ciudad de los monstruos invasores combinando magia y disparos. Derrota al máximo de enemigos que puedas y protege la ciudad en esta trepidante aventura FPS.",
+      "thumbnail": "Resources/Images/magic_shooter-icon.jpg",
       "releaseDate": "2023",
       "playable": true,
       "tags": [
@@ -17,39 +92,182 @@
           "iconClass": "fas fa-code"
         },
         {
-          "name": "AI",
-          "iconClass": "fas fa-robot"
-        },
-        {
-          "name": "Terminal",
-          "iconClass": "fas fa-terminal"
+          "name": "3D",
+          "iconClass": "fas fa-cube"
         }
       ],
       "links": {
-        "itch": "https://itch.io/embed-upload/12228899?color=444444",
-        "github": "https://github.com/jorodu/command-console"
+        "itch": "https://robledodu.itch.io/magic-shooter"
       },
       "gallery": [
-        "https://placehold.co/400x300/png?text=Command+Console+Gallery+1",
-        "https://placehold.co/400x300/png?text=Command+Console+Gallery+2"
+        "Resources/Images/magic_shooter-icon.jpg",
+        "Resources/Videos/magic_shooter.mp4",
+        "Resources/Images/magic_shooter-1.jpg",
+        "Resources/Images/magic_shooter-2.jpg",
+        "Resources/Images/magic_shooter-3.jpg",
+        "Resources/Images/magic_shooter-4.jpg",
+        "Resources/Images/magic_shooter-5.jpg"
       ],
       "effects": [
         "neon",
         "terminal"
       ],
-      "altThumbnail": "Icono del juego Command Console, mostrando una ventana de terminal estilizada.",
-      "altImage": "Captura de pantalla del juego Command Console, con una interfaz de terminal y texto de código.",
+      "altThumbnail": "Icono del juego Magic Shooter",
       "altGallery": [
-        "Captura de pantalla del juego Command Console mostrando un desafío de programación.",
-        "Captura de pantalla de Command Console mostrando la interfaz principal del juego."
+        "Icono del juego Magic Shooter",
+        "Captura de pantalla de Magic Shooter.",
+        "Video gameplay del juego Magic Shooter.",
+        "Captura de pantalla de Magic Shooter.",
+        "Captura de pantalla de Magic Shooter.",
+        "Captura de pantalla de Magic Shooter.",
+        "Captura de pantalla de Magic Shooter."
       ]
     },
     {
-      "title": "Flafy Bat",
-      "description": "Atmospheric platformer with unique flight mechanics.",
-      "thumbnail": "https://placehold.co/200x200/png?text=Flafy+Bat+Icon",
-      "image": "https://placehold.co/800x600/png?text=Flafy+Bat+Screenshot",
-      "releaseDate": "2022",
+      "type": "game",
+      "title": "Soulveler",
+      "description": "Adéntrate en Soulveler, un roguelike 2.5D ambientado en un carnaval de pesadilla. Enfréntate a enemigos implacables, trampas mortales y jefes aterradores en un ciclo interminable de actuaciones. Mejora tus habilidades, domina las armas especiales y adéntrate aún más en la locura.",
+      "thumbnail": "Resources/Images/soulveler-icon.png",
+      "releaseDate": "2023",
+      "playable": true,
+      "tags": [
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "3D",
+          "iconClass": "fas fa-cube"
+        }
+      ],
+      "links": {
+        "itch": "https://robledodu.itch.io/soulveler"
+      },
+      "gallery": [
+        "Resources/Images/soulveler-icon.png",
+        "Resources/Videos/soulveler.mp4",
+        "Resources/Images/soulveler-1.jpg",
+        "Resources/Images/soulveler-2.jpg",
+        "Resources/Images/soulveler-3.jpg",
+        "Resources/Images/soulveler-4.jpg"
+      ],
+      "effects": [
+        "neon",
+        "terminal"
+      ],
+      "altThumbnail": "Icono del juego Soulveler.",
+      "altGallery": [
+        "Captura de pantalla del juego Soulveler.",
+        "Trailer del juego Soulveler.",
+        "Captura de pantalla del juego Soulveler.",
+        "Captura de pantalla del juego Soulveler.",
+        "Captura de pantalla del juego Soulveler.",
+        "Captura de pantalla del juego Soulveler."
+      ]
+    },
+    {
+      "type": "game",
+      "title": "Magic Campus",
+      "description": "Adéntrate en Magic Campus, una simulación mágica de realidad virtual en la que podrás aprovechar el poder de los hechizos mediante gestos de seguimiento de las manos e interacciones basadas en el movimiento. Aprende a lanzar poderosos hechizos, preparar pociones y manipular objetos usando solo tus manos. Explora una academia mística donde cada gesto desbloquea nuevas posibilidades mágicas.",
+      "thumbnail": "Resources/Videos/magic_campus.mp4",
+      "releaseDate": "2023",
+      "playable": true,
+      "tags": [
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "VR",
+          "iconClass": "fa-solid fa-vr-cardboard"
+        },
+        {
+          "name": "3D",
+          "iconClass": "fas fa-cube"
+        }
+      ],
+      "links": {
+        "itch": "https://robledodu.itch.io/magic-campus"
+      },
+      "gallery": [
+        "Resources/Videos/magic_campus.mp4",
+        "Resources/Images/magic_campus-1.png",
+        "Resources/Images/magic_campus-2.png",
+        "Resources/Images/magic_campus-3.png",
+        "Resources/Images/magic_campus-4.png"
+      ],
+      "effects": [
+        "neon",
+        "terminal"
+      ],
+      "altThumbnail": "Video gameplay del juego Magic Campus.",
+      "altGallery": [
+        "Video gameplay del juego Magic Campus.",
+        "Captura de pantalla del Magic Campus.",
+        "Captura de pantalla del Magic Campus.",
+        "Captura de pantalla del Magic Campus."
+      ]
+    },
+    {
+      "type": "game",
+      "title": "Shoot Test",
+      "description": "Adéntrate en Shooting Test, una experiencia de tiro en RV diseñada para llevar tus reflejos y precisión al límite. Utiliza el seguimiento de movimiento completo para interactuar a la perfección con tu entorno, tanto con los mandos de RV como con el seguimiento del casco para disfrutar de una experiencia totalmente envolvente.",
+      "thumbnail": "Resources/Videos/shoot_test.mp4",
+      "releaseDate": "2023",
+      "playable": true,
+      "tags": [
+        {
+          "name": "Unity",
+          "iconClass": "fab fa-unity"
+        },
+        {
+          "name": "C#",
+          "iconClass": "fas fa-code"
+        },
+        {
+          "name": "VR",
+          "iconClass": "fa-solid fa-vr-cardboard"
+        },
+        {
+          "name": "3D",
+          "iconClass": "fas fa-cube"
+        }
+      ],
+      "links": {
+        "itch": "https://robledodu.itch.io/shoot-test"
+      },
+      "gallery": [
+        "Resources/Videos/shoot_test.mp4",
+        "Resources/Images/shooting_test-1.png",
+        "Resources/Images/shooting_test-2.png",
+        "Resources/Images/shooting_test-3.png"
+      ],
+      "effects": [
+        "neon",
+        "terminal"
+      ],
+      "altThumbnail": "Video gameplay del juego Shoot Test.",
+      "altGallery": [
+        "Video gameplay del juego Shoot Test.",
+        "Captura de pantalla del Shoot Test.",
+        "Captura de pantalla del Shoot Test.",
+        "Captura de pantalla del Shoot Test."
+      ]
+    },
+    {
+      "type": "game",
+      "title": "The Traveller",
+      "description": "Se basa en una serie de minijuegos proporcionados por expertos de VITHAS y con la opción de crear usuarios para los distintos pacientes, también es posible elegir el nivel de dificultad de cada minijuego. Este proyecto se creó con la idea de ayudar en la rehabilitación de personas con problemas cognitivos. Toda esta información se almacena en una base de datos. Se trata de un proyecto universitario realizado por un grupo de 13 estudiantes, en el que yo encajé la base de datos y el minijuego Katamino.",
+      "thumbnail": "Resources/Images/the_traveller-icon.png",
+      "releaseDate": "2023",
       "playable": true,
       "tags": [
         {
@@ -63,37 +281,28 @@
         {
           "name": "2D Art",
           "iconClass": "fas fa-paint-brush"
-        },
-        {
-          "name": "Sound Design",
-          "iconClass": "fas fa-volume-up"
         }
       ],
       "links": {
-        "itch": "https://jorodu.itch.io/flafy-bat",
-        "github": "https://github.com/jorodu/flafy-bat"
+        "github": "https://robledodu.itch.io/the-traveller"
       },
       "gallery": [
-        "https://placehold.co/400x300/png?text=Flafy+Bat+Gallery+1",
-        "https://placehold.co/400x300/png?text=Flafy+Bat+Gallery+2"
+        "Resources/Images/soulveler-icon.png",
+        "Resources/Videos/the_traveller.mp4"
       ],
-      "effects": [
-        "neon"
-      ],
-      "altThumbnail": "Icono del juego Flafy Bat, mostrando un murciélago estilizado con un fondo neón.",
-      "altImage": "Captura de pantalla de Flafy Bat, mostrando al personaje principal volando en un entorno oscuro.",
+      "altThumbnail": "Icono del juego The Traveller.",
       "altGallery": [
-        "Captura de pantalla de Flafy Bat durante un nivel con obstáculos.",
-        "Captura de pantalla mostrando la estética de Flafy Bat, con colores brillantes y un fondo oscuro."
+        "Icono del juego The Traveller.",
+        "Video del juego The Traveller."
       ]
     },
     {
-      "title": "Soulveler",
-      "description": "Immersive exploration game with puzzle elements.",
-      "thumbnail": "https://placehold.co/200x200/png?text=Soulveler+Icon",
-      "image": "https://placehold.co/800x600/png?text=Soulveler+Screenshot",
-      "releaseDate": "En desarrollo",
-      "playable": false,
+      "type": "game",
+      "title": "Flafy Bat",
+      "description": "Se trata de un proyecto para la universidad, es un juego al estilo FlappyBird. Tanto el arte como la programación son míos.",
+      "thumbnail": "Resources/Images/flafy_bat-icon.png",
+      "releaseDate": "2022",
+      "playable": true,
       "tags": [
         {
           "name": "Unity",
@@ -104,98 +313,32 @@
           "iconClass": "fas fa-code"
         },
         {
-          "name": "Narrativa",
-          "iconClass": "fas fa-book"
+          "name": "Android",
+          "iconClass": "fas fa-android"
         },
         {
-          "name": "Puzzle",
-          "iconClass": "fas fa-puzzle-piece"
+          "name": "2D Art",
+          "iconClass": "fas fa-paint-brush"
         }
       ],
       "links": {
-        "itch": "https://jorodu.itch.io/soulveler",
-        "github": "https://github.com/jorodu/soulveler"
+        "demo": "https://itch.io/embed-upload/5190429?color=444444",
+        "itch": "https://jorodu.itch.io/flafy-bat",
+        "github": "https://github.com/jorodu/flafy-bat"
       },
       "gallery": [
-        "https://placehold.co/400x300/png?text=Soulveler+Gallery+1",
-        "https://placehold.co/400x300/png?text=Soulveler+Gallery+2"
+        "Resources/Images/flafy_bat-icon.png",
+        "Resources/Images/flafy_bat-1.jpg",
+        "Resources/Videos/flafy_bat.mp4"
       ],
-      "altThumbnail": "Icono del juego Soulveler, mostrando un paisaje etéreo y un personaje explorando.",
-      "altImage": "Captura de pantalla de Soulveler, mostrando un entorno misterioso y un personaje jugador.",
+      "effects": [
+        "neon"
+      ],
+      "altThumbnail": "Icono del juego Flafy Bat, mostrando un murciélago estilizado con un fondo neón.",
+      "altImage": "Captura de pantalla de Flafy Bat, mostrando al personaje principal volando en un entorno oscuro.",
       "altGallery": [
-        "Captura de pantalla del juego Soulveler, con un puzle ambiental.",
-        "Captura de pantalla mostrando la atmósfera inmersiva de Soulveler."
-      ]
-    }
-  ],
-  "projects": [
-    {
-      "title": "VR Modeling Tool",
-      "description": "3D modeling application with VR integration.",
-      "thumbnail": "https://placehold.co/200x200/png?text=VR+Modeling+Tool+Icon",
-      "image": "https://placehold.co/800x600/png?text=VR+Modeling+Tool+Screenshot",
-      "releaseDate": "2023",
-      "tags": [
-        {
-          "name": "Unreal Engine",
-          "iconClass": "fab fa-unreal-engine"
-        },
-        {
-          "name": "C++",
-          "iconClass": "fas fa-code"
-        },
-        {
-          "name": "VR",
-          "iconClass": "fas fa-vr-cardboard"
-        }
-      ],
-      "links": {
-        "github": "https://github.com/jorodu/vr-modeling-tool"
-      },
-      "gallery": [
-        "https://placehold.co/400x300/png?text=VR+Modeling+Tool+Gallery+1",
-        "https://placehold.co/400x300/png?text=VR+Modeling+Tool+Gallery+2"
-      ],
-      "altThumbnail": "Icono del proyecto VR Modeling Tool, que muestra unas gafas de realidad virtual y herramientas de modelado.",
-      "altImage": "Captura de pantalla de la aplicación VR Modeling Tool, con un modelo 3D y una interfaz de usuario VR.",
-      "altGallery": [
-        "Captura de pantalla mostrando la interacción con el modelo 3D en VR Modeling Tool.",
-        "Captura de pantalla de la interfaz de usuario de VR Modeling Tool en un entorno de realidad virtual."
-      ]
-    },
-    {
-      "title": "Pixel Art Generator",
-      "description": "Procedural pixel art creation tool.",
-      "thumbnail": "https://placehold.co/200x200/png?text=Pixel+Art+Generator+Icon",
-      "image": "https://placehold.co/800x600/png?text=Pixel+Art+Generator+Screenshot",
-      "releaseDate": "2022",
-      "tags": [
-        {
-          "name": "JavaScript",
-          "iconClass": "fab fa-js"
-        },
-        {
-          "name": "Canvas API",
-          "iconClass": "fas fa-canvas-gauge"
-        },
-        {
-          "name": "Algorithms",
-          "iconClass": "fas fa-brain"
-        }
-      ],
-      "links": {
-        "demo": "https://jorodu.com/pixel-art-generator",
-        "github": "https://github.com/jorodu/pixel-art-generator"
-      },
-      "gallery": [
-        "https://placehold.co/400x300/png?text=Pixel+Art+Generator+Gallery+1",
-        "https://placehold.co/400x300/png?text=Pixel+Art+Generator+Gallery+2"
-      ],
-      "altThumbnail": "Icono del proyecto Pixel Art Generator, mostrando un ejemplo de pixel art generado proceduralmente.",
-      "altImage": "Captura de pantalla de la herramienta Pixel Art Generator, mostrando la interfaz y un ejemplo de arte generado.",
-      "altGallery": [
-        "Captura de pantalla mostrando diferentes resultados generados con Pixel Art Generator.",
-        "Captura de pantalla de la interfaz de usuario de Pixel Art Generator."
+        "Captura de pantalla de Flafy Bat durante un nivel con obstáculos.",
+        "Captura de pantalla mostrando la estética de Flafy Bat, con colores brillantes y un fondo oscuro."
       ]
     }
   ]

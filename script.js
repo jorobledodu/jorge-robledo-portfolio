@@ -1,9 +1,14 @@
-// script.js
-// Import SVG icons
+/**
+ * Main script file for the portfolio website.
+ * Handles theme switching, translations, project filtering, and UI interactions.
+ * @module script
+ */
+
 import svgIcons from './svg-icons.js';
+import setupAnimations from './setupAnimations.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Elementos del DOM
+    // DOM element references for better performance and maintainability
     const DOM = {
         themeToggle: document.getElementById('theme-toggle'),
         body: document.body,
@@ -12,7 +17,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         i18nPlaceholders: document.querySelectorAll('[data-i18n-placeholder]'),
         projectsGrid: document.querySelector('.grid-proyectos'),
         filterButtons: document.querySelectorAll('.filter-btn'),
-        // searchInput: document.getElementById('project-search'), // ELIMINADO
         noResultsMessage: document.getElementById('no-results'),
         modal: document.getElementById('modal-proyecto'),
         closeModal: document.querySelector('.close-button'),
@@ -25,11 +29,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         contactForm: document.getElementById('contact-form'),
         formSuccess: document.getElementById('form-success'),
         backToTop: document.getElementById('back-to-top'),
-        skillLevels: document.querySelectorAll('.skill-level'), //Se usará luego
+        skillLevels: document.querySelectorAll('.skill-level'),
         gameOverlay: document.getElementById('game-demo-overlay'),
         gameFrame: document.getElementById('game-frame'),
-        herramientasContainer: document.querySelector('.herramientas .etiquetas-tecnologias') // Contenedor de herramientas
-
+        herramientasContainer: document.querySelector('.herramientas .etiquetas-tecnologias'), // Contenedor de herramientas
+        socialIcons: document.querySelectorAll('.svg-icon') // Iconos de redes sociales
     };
 
     // Estado de la aplicación
@@ -37,19 +41,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         portfolioData: null,
         currentFilter: 'all',
         currentLang: localStorage.getItem('language') || 'es',
-        currentTheme: localStorage.getItem('theme') || 'light',
-        // searchQuery: '',  // ELIMINADO
+        currentTheme: localStorage.getItem('theme') || 'dark',
+
         activeProject: null
     };
 
     // Lista de habilidades (fuera de las funciones, para que sea accesible globalmente)
     const allSkills = [
-        { name: "Unity", iconClass: "fab fa-unity", level: 90 },
-        { name: "C#", iconClass: "fas fa-code", level: 85 },
-        { name: "HTML", iconClass: "fab fa-html5", level: 80 },
-        { name: "CSS", iconClass: "fab fa-css3-alt", level: 80 },
-        { name: "GitHub", iconClass: "fab fa-github", level: 70 },
-        { name: "Unreal Engine", iconClass: "fab fa-unreal-engine", level: 60 }
+        { name: "Unity", iconClass: "unity" },
+        { name: "C#", iconClass: "csharp" },
+        { name: "HTML", iconClass: "html" },
+        { name: "CSS", iconClass: "css" },
+        { name: "GitHub", iconClass: "git" },
+        { name: "Unreal Engine", iconClass: "unrealengine" }
     ];
 
     // Cargar datos del portfolio
@@ -57,10 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch('portfolioData.json');
             const data = await response.json();
-            return {
-                games: data.games.map(game => ({ ...game, type: 'game' })),
-                projects: data.projects.map(project => ({ ...project, type: 'project' }))
-            };
+            return data; // Return the data directly to preserve original order
         } catch (error) {
             console.error('Error loading portfolio data:', error);
             // Mostrar mensaje de error al usuario
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             errorDiv.textContent = translations[state.currentLang]["load-error"]; // Usa la traducción
             errorDiv.style.color = 'red';
             DOM.projectsGrid.parentElement.insertBefore(errorDiv, DOM.projectsGrid);
-            return { games: [], projects: [] }; // Usar datos vacíos
+            return { items: [] }; // Return empty items array with the same structure
         }
     }
 
@@ -98,17 +99,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Filtrado y búsqueda  (MODIFICADO:  Se elimina la parte de búsqueda)
+    /**
+     * Filters projects based on the current filter type (all, game, or project)
+     * and updates the display accordingly.
+     */
     function filterProjects() {
-        const allProjects = [...state.portfolioData.games, ...state.portfolioData.projects];
-        let filtered = allProjects;
-
-        // Aplicar filtro
-        if (state.currentFilter !== 'all') {
-            filtered = filtered.filter(project => project.type === state.currentFilter);
-        }
-
-        //  (Se elimina la parte de búsqueda)
+        const allProjects = state.portfolioData.items;
+        const filtered = state.currentFilter === 'all'
+            ? allProjects
+            : allProjects.filter(project => project.type === state.currentFilter);
 
         renderProjects(filtered);
         DOM.noResultsMessage.style.display = filtered.length ? 'none' : 'block';
@@ -116,11 +115,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Renderizar proyectos
     function renderProjects(projects) {
-        DOM.projectsGrid.innerHTML = projects.map(project => `
+        DOM.projectsGrid.innerHTML = projects.map(project => {
+            const isVideoThumbnail = project.thumbnail && project.thumbnail.toLowerCase().endsWith('.mp4');
+            const thumbnailContent = isVideoThumbnail ? 
+                `<div class="card-img-container video-thumbnail">
+                    <video src="${project.thumbnail}" muted loop playsinline class="img-proyecto">
+                        <source src="${project.thumbnail}" type="video/mp4">
+                    </video>
+                    <i class="fas fa-play video-play-icon"></i>
+                </div>` :
+                `<div class="card-img-container">
+                    <img src="${project.thumbnail}" alt="${project.altThumbnail || project.title}" class="img-proyecto" loading="lazy">
+                </div>`;
+
+            return `
             <div class="tarjeta-proyecto" data-type="${project.type}" data-project="${project.title}">
-                <div class="card-img-container">
-                <img src="${project.thumbnail}" alt="${project.altThumbnail || project.title}" class="img-proyecto" loading="lazy">
-                </div>
+                ${thumbnailContent}
                 <div class="card-content">
                     <h3>${project.title}</h3>
                     <p class="project-description">${project.description.substring(0, 100)}${project.description.length > 100 ? '...' : ''}</p>
@@ -129,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <div class="project-release-date">
                             <i class="fas fa-calendar-alt"></i> ${project.releaseDate || 'En desarrollo'}
                         </div>
-                        ${project.type === 'game' ? `
+                        ${project.playable !== undefined ? `
                         <div class="project-status ${project.playable ? 'playable' : 'not-playable'}">
                             <i class="fas ${project.playable ? 'fa-gamepad' : 'fa-code'}">
                             </i> ${project.playable ? translations[state.currentLang]["playable"] : translations[state.currentLang]["not-playable"]}
@@ -137,12 +147,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                     
                     <ul class="etiquetas-tecnologias">
-                     ${project.tags.slice(0, 3).map(tag => `<li><i class="${tag.iconClass}"></i> ${tag.name}</li>`).join('')}
+                     ${project.tags.slice(0, 3).map(tag => {
+                        const tagName = tag.name.toLowerCase();
+                        const tagKey = tagName === 'c#' ? 'csharp' : tagName.replace(/[\s\/]+/g, '');
+                        return svgIcons[tagKey] ?
+                            `<li>${svgIcons[tagKey]} ${tag.name}</li>` :
+                            `<li><i class="${tag.iconClass}"></i> ${tag.name}</li>`;
+                    }).join('')}
                     </ul>
                     
                     <div class="botones-proyecto">
-                        ${project.type === 'game' && project.links.itch ? `
-                        <button class="play-demo-btn-card" data-demo="${project.links.itch || '#'}" aria-label="Jugar demo de ${project.title}">
+                        ${project.playable && project.links.demo ? `
+                        <button class="play-demo-btn-card" data-demo="${project.links.demo || '#'}" aria-label="Jugar demo de ${project.title}">
                             <i class="fas fa-play"></i>
                         </button>` : ''}
                         ${project.links.itch ? `
@@ -156,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
           </div>
-        `).join('');
+        `}).join('');
 
         // Añadir event listeners a las tarjetas DESPUÉS de renderizarlas
         document.querySelectorAll('.tarjeta-proyecto').forEach(card => {
@@ -170,6 +186,52 @@ document.addEventListener('DOMContentLoaded', async () => {
                 openGameDemo(button.dataset.demo);
             });
         });
+
+        // Initialize video thumbnails
+        document.querySelectorAll('.video-thumbnail video').forEach(video => {
+            // Make sure video is muted to allow autoplay
+            video.muted = true;
+            video.loop = true;
+            video.preload = 'metadata';
+            
+            // Play/pause on hover
+            const card = video.closest('.tarjeta-proyecto');
+            if (card) {
+                card.addEventListener('mouseenter', () => {
+                    // Ensure video is ready before playing
+                    if (video.readyState >= 2) {
+                        video.play()
+                            .then(() => {
+                                const playIcon = card.querySelector('.video-play-icon');
+                                if (playIcon) playIcon.style.display = 'none';
+                            })
+                            .catch(e => console.log('Video play error:', e));
+                    } else {
+                        video.addEventListener('loadeddata', () => {
+                            video.play()
+                                .then(() => {
+                                    const playIcon = card.querySelector('.video-play-icon');
+                                    if (playIcon) playIcon.style.display = 'none';
+                                })
+                                .catch(e => console.log('Video play error on loadeddata:', e));
+                        }, { once: true });
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    video.pause();
+                    const playIcon = card.querySelector('.video-play-icon');
+                    if (playIcon) playIcon.style.display = 'block';
+                });
+            }
+        });
+        
+        // Force video element size to match container
+        document.querySelectorAll('.card-img-container video').forEach(video => {
+            video.style.width = '100%';
+            video.style.height = '100%';
+            video.style.objectFit = 'cover';
+        });
     }
 
     function openGameDemo(demoUrl) {
@@ -179,28 +241,101 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         // Establecer la URL del iframe y mostrar el overlay
         DOM.gameFrame.src = demoUrl;
+        const gameDemoTitle = document.getElementById('game-demo-title');
+        if (gameDemoTitle && state.activeProject) {
+            gameDemoTitle.textContent = state.activeProject.title;
+            // Apply custom dimensions if available
+            if (state.activeProject.demoSize) {
+                const container = document.querySelector('.game-frame-container');
+                const frame = DOM.gameFrame;
+                frame.style.width = state.activeProject.demoSize.width + 'px';
+                frame.style.height = state.activeProject.demoSize.height + 'px';
+                container.style.width = state.activeProject.demoSize.width + 'px';
+                container.style.height = state.activeProject.demoSize.height + 'px';
+            }
+        }
         DOM.gameOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 
-    function createGalleryItem(image) {
-        const imgElement = document.createElement('img');
-        imgElement.src = image.src;
-        imgElement.alt = image.alt;
-        imgElement.loading = "lazy";
-        imgElement.addEventListener('click', () => {
-            DOM.modalImage.src = image.src;
-            DOM.modalImage.alt = image.alt;
-            // Remover la clase 'active' de todas las imágenes
-            document.querySelectorAll('#modal-galeria-proyecto img').forEach(img => img.classList.remove('active'));
-            // Añadir la clase 'active' a la imagen clickeada
-            imgElement.classList.add('active');
-        });
-        return imgElement;
+    function createGalleryItem(source) {
+        const isVideo = source.toLowerCase().endsWith('.mp4');
+        
+        if (isVideo) {
+            const videoElement = document.createElement('video');
+            videoElement.src = source;
+            videoElement.controls = false;
+            videoElement.muted = true;
+            videoElement.style.width = '150px';
+            videoElement.style.height = '100px';
+            videoElement.style.objectFit = 'cover';
+            videoElement.style.pointerEvents = 'none';
+            const videoContainer = document.createElement('div');
+            videoContainer.style.position = 'relative';
+            videoContainer.style.width = '150px';
+            videoContainer.style.height = '100px';
+            videoContainer.appendChild(videoElement);
+            const playIcon = document.createElement('i');
+            playIcon.className = 'fas fa-play';
+            playIcon.style.position = 'absolute';
+            playIcon.style.top = '50%';
+            playIcon.style.left = '50%';
+            playIcon.style.transform = 'translate(-50%, -50%)';
+            playIcon.style.color = 'white';
+            playIcon.style.fontSize = '24px';
+            playIcon.style.textShadow = '0 0 10px rgba(0,0,0,0.5)';
+            videoContainer.appendChild(playIcon);
+            videoContainer.addEventListener('click', () => {
+                // First, clean up any existing videos
+                const existingVideos = DOM.modalImage.parentNode.querySelectorAll('video');
+                existingVideos.forEach(video => {
+                    video.pause();
+                    video.src = '';
+                    video.remove();
+                });
+                
+                // Hide the image and create a new video element
+                DOM.modalImage.style.display = 'none';
+                const modalVideo = document.createElement('video');
+                modalVideo.src = source;
+                modalVideo.controls = true;
+                modalVideo.style.width = '100%';
+                modalVideo.style.height = 'auto';
+                modalVideo.style.maxHeight = '600px';
+                modalVideo.style.objectFit = 'contain';
+                modalVideo.setAttribute('id', 'current-modal-video');
+                DOM.modalImage.parentNode.insertBefore(modalVideo, DOM.modalImage);
+                
+                // Remove any existing active class
+                document.querySelectorAll('#modal-galeria-proyecto img, #modal-galeria-proyecto video, #modal-galeria-proyecto div').forEach(item => item.classList.remove('active'));
+                videoContainer.classList.add('active');
+            });
+            return videoContainer;
+        } else {
+            const imgElement = document.createElement('img');
+            imgElement.src = source;
+            imgElement.alt = state.activeProject.altGallery?.[state.activeProject.gallery.indexOf(source)] || state.activeProject.title;
+            imgElement.loading = "lazy";
+            imgElement.addEventListener('click', () => {
+                DOM.modalImage.style.display = 'block';
+                const existingVideos = DOM.modalImage.parentNode.querySelectorAll('video');
+                existingVideos.forEach(video => {
+                    video.pause();
+                    video.src = '';
+                    video.remove();
+                });
+                DOM.modalImage.src = source;
+                DOM.modalImage.alt = imgElement.alt;
+                document.querySelectorAll('#modal-galeria-proyecto img, #modal-galeria-proyecto video').forEach(item => item.classList.remove('active'));
+                imgElement.classList.add('active');
+            });
+            return imgElement;
+        }
     }
 
     // Abrir modal de proyecto
     function openProjectModal(projectName) {
-        const project = [...state.portfolioData.games, ...state.portfolioData.projects].find(p => p.title === projectName);
+        const project = state.portfolioData.items.find(p => p.title === projectName);
         if (!project) return;
 
         state.activeProject = project;
@@ -216,35 +351,57 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Llenar la galería
         if (project.gallery && project.gallery.length > 0) {
-            project.gallery.forEach(image => {
-                DOM.modalGallery.appendChild(createGalleryItem(image));
+            project.gallery.forEach(source => {
+                DOM.modalGallery.appendChild(createGalleryItem(source));
             });
-            // Establecer la primera imagen de la galería como activa por defecto
+            // Establecer el primer elemento de la galería como activo por defecto
             if (project.gallery.length > 0) {
-                DOM.modalImage.src = project.gallery[0].src;
-                DOM.modalImage.alt = project.gallery[0].alt;
+                const firstSource = project.gallery[0];
+                const isFirstItemVideo = firstSource.toLowerCase().endsWith('.mp4');
+                
+                if (isFirstItemVideo) {
+                    // Si es un video, ocultamos la imagen principal y creamos un elemento de video
+                    DOM.modalImage.style.display = 'none';
+                    const modalVideo = document.createElement('video');
+                    modalVideo.src = firstSource;
+                    modalVideo.controls = true;
+                    modalVideo.style.width = '100%';
+                    modalVideo.style.height = 'auto';
+                    modalVideo.style.maxHeight = '600px';
+                    modalVideo.style.objectFit = 'contain';
+                    modalVideo.setAttribute('id', 'current-modal-video');
+                    DOM.modalImage.parentNode.insertBefore(modalVideo, DOM.modalImage);
+                } else {
+                    // Si es una imagen, mostramos la imagen principal
+                    DOM.modalImage.style.display = 'block';
+                    DOM.modalImage.src = firstSource;
+                    DOM.modalImage.alt = project.altGallery?.[0] || project.title;
+                }
+                
                 DOM.modalGallery.firstChild.classList.add('active');
             }
         }
         // Llenar etiquetas (tags)
         project.tags.forEach(tag => {
             const li = document.createElement('li');
-            const tagKey = tag.name.toLowerCase().replace(/[\s\/]+/g, '');
-            
+            const tagName = tag.name.toLowerCase();
+            // Special handling for C# tag
+            const tagKey = tagName === 'c#' ? 'csharp' : tagName.replace(/[\s\/]+/g, '');
+
             if (svgIcons[tagKey]) {
                 li.innerHTML = `${svgIcons[tagKey]} ${tag.name}`;
             } else {
                 li.innerHTML = `<i class="${tag.iconClass}"></i> ${tag.name}`;
             }
-            
+
             DOM.modalTags.appendChild(li);
         });
 
 
         // Llenar enlaces con los mismos botones que aparecen en las tarjetas
         DOM.modalLinks.innerHTML = `
-            ${project.type === 'game' && project.links.itch ? `
-            <button class="play-demo-btn-card" data-demo="${project.links.itch || '#'}" aria-label="Jugar demo de ${project.title}">
+            ${project.playable && project.links.demo ? `
+            <button class="play-demo-btn-card" data-demo="${project.links.demo || '#'}" aria-label="Jugar demo de ${project.title}">
                 <i class="fas fa-play"></i>
             </button>` : ''}
             ${project.links.itch ? `
@@ -256,7 +413,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <i class="fab fa-github"></i>
             </a>` : ''}
         `;
-        
+
         // Añadir event listener al botón de demo en el modal
         const modalPlayButton = DOM.modalLinks.querySelector('.play-demo-btn-card');
         if (modalPlayButton) {
@@ -275,15 +432,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Creamos las etiquetas de las herramientas
         allSkills.forEach(skill => {
             const li = document.createElement('li');
-            
-            // Usar SVG icons de SVGL si están disponibles, sino usar Font Awesome
-            const skillKey = skill.name.toLowerCase().replace(/[\s\/]+/g, '');
-            if (svgIcons[skillKey]) {
-                li.innerHTML = `${svgIcons[skillKey]} ${skill.name}`;
+
+            // Usar SVG icons para todas las habilidades
+            const iconKey = skill.iconClass;
+            if (svgIcons[iconKey]) {
+                li.innerHTML = `${svgIcons[iconKey]} ${skill.name}`;
             } else {
-                li.innerHTML = `<i class="${skill.iconClass}"></i> ${skill.name}`;
+                li.innerHTML = `${skill.name}`;
             }
-            
+
             DOM.herramientasContainer.appendChild(li);
         });
     }
@@ -293,12 +450,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     function setupEmailCopy() {
         const copyEmailBtn = document.getElementById('copy-email');
         if (copyEmailBtn) {
-            copyEmailBtn.addEventListener('click', function() {
+            copyEmailBtn.addEventListener('click', function () {
                 const email = 'contacto@jorodu.com';
                 navigator.clipboard.writeText(email).then(() => {
                     // Mostrar tooltip
                     this.classList.add('copied');
-                    
+
                     // Ocultar tooltip después de 2 segundos
                     setTimeout(() => {
                         this.classList.remove('copied');
@@ -353,13 +510,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         */
 
+        // Function to clean up videos when closing the modal
+        function cleanupModalVideos() {
+            // Remove any video elements that were added
+            const modalVideos = DOM.modalImage.parentNode.querySelectorAll('video');
+            modalVideos.forEach(video => {
+                video.pause();
+                video.src = '';
+                video.remove();
+            });
+            // Show the modal image again
+            DOM.modalImage.style.display = 'block';
+        }
+
         DOM.closeModal.addEventListener('click', () => {
+            cleanupModalVideos();
             DOM.modal.style.display = 'none';
         });
 
         // Cerrar el modal si se hace clic fuera de él
         window.addEventListener('click', (event) => {
             if (event.target === DOM.modal) {
+                cleanupModalVideos();
                 DOM.modal.style.display = 'none';
             }
         });
@@ -421,16 +593,45 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     }
 
+    // Inicializar iconos SVG para redes sociales
+    function initSocialIcons() {
+        // Asignar los iconos SVG a los elementos correspondientes
+        document.querySelector('.github-icon').innerHTML = svgIcons.github;
+        document.querySelector('.linkedin-icon').innerHTML = svgIcons.linkedin;
+        document.querySelector('.itchio-icon').innerHTML = svgIcons.itchio;
+        document.querySelector('.twitter-icon').innerHTML = svgIcons.twitter;
+    }
     // Inicialización
     async function init() {
+        // Aplicar tema guardado o por defecto
         applyTheme(state.currentTheme);
-        applyTranslations(state.currentLang);
-        setupEventListeners();
-        state.portfolioData = await loadPortfolioData();
-        filterProjects(); // Llama a filterProjects en lugar de renderProjects
-        renderSkills(); // Llamar a renderSkills para mostrar las habilidades al inicio.
-        setupEmailCopy(); // Configurar funcionalidad de copiar email
-    }
 
+        // Aplicar idioma guardado o por defecto
+        applyTranslations(state.currentLang);
+        DOM.langButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === state.currentLang);
+        });
+
+        // Cargar datos del portfolio
+        state.portfolioData = await loadPortfolioData();
+
+        // Renderizar proyectos iniciales
+        filterProjects();
+
+        // Renderizar habilidades
+        renderSkills();
+
+        // Inicializar iconos SVG para redes sociales
+        initSocialIcons();
+
+        // Configurar copiar email
+        setupEmailCopy();
+
+        // Configurar event listeners para botones interactivos
+        setupEventListeners();
+
+        // Configurar animaciones
+        setupAnimations();
+    }
     init();
 });

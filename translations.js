@@ -1,11 +1,16 @@
+/**
+ * Translations object containing all text content in multiple languages.
+ * Each language (es, en) contains key-value pairs for different UI elements.
+ * @type {Object.<string, Object.<string, string>>}
+ */
 const translations = {
     "es": {
         "location": "Valencia, España",
         "about-title": "Sobre mí",
         "about-description": "Desarrollador de videojuegos y programador con pasión por crear experiencias interactivas únicas.",
-        "experience-title": "Experiencia",
+        "experience-title": "Experiencia laboral y académica",
         "tools-title": "Herramientas y Tecnologías",
-        "download-cv": "Descargar CV",
+        "view-cv": "Ver CV",
         "filter-all": "Todos",
         "filter-games": "Juegos",
         "filter-projects": "Proyectos",
@@ -31,9 +36,9 @@ const translations = {
         "location": "Valencia, Spain",
         "about-title": "About Me",
         "about-description": "Game developer and programmer passionate about creating unique interactive experiences.",
-        "experience-title": "Experience",
+        "experience-title": "Work and academic experience",
         "tools-title": "Tools & Technologies",
-        "download-cv": "Download CV",
+        "view-cv": "View CV",
         "filter-all": "All",
         "filter-games": "Games",
         "filter-projects": "Projects",

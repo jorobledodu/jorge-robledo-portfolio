@@ -5,31 +5,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-        content="Jorge Robledo - Desarrollador de videojuegos y programador especializado en Unity, C#, y experiencias interactivas" />
+        content="Jorge Robledo - Desarrollador de videojuegos y diseñador especializado en Unity, C#, y experiencias interactivas" />
     <title>Jorge Robledo | Game Developer Portfolio</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="back-to-top.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Press+Start+2P&family=Rubik+Bubbles&display=swap" />
-    <link rel="icon" href="Resources/Images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="Resources/Images/perfil-avatar.png" type="image/x-icon" />
 </head>
 
 <body>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <div class="language-selector">
-        <button class="lang-btn active" data-lang="es">ES</button>
-        <button class="lang-btn" data-lang="en">EN</button>
+    <div class="top-navbar">
+        <div class="language-selector">
+            <button class="lang-btn active" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+        </button>
     </div>
 
     <div class="notebook-page">
         <section id="info-personal">
             <div class="container">
-                <div class="profile-img-container" aria-label="Foto de perfil con efecto interactivo, click para girar">
+                <div class="profile-img-container" aria-label="Foto de perfil con efecto interactivo, hover para girar">
                     <div class="profile-img-inner">
                         <div class="profile-img-front">
                             <img src="Resources/Images/perfil-avatar.png" alt="Avatar robledodu" class="profile-img"
@@ -40,33 +40,38 @@
                                 loading="lazy" />
                         </div>
                     </div>
+                    <div class="stickman-container">
+                        <img src="Resources/Images/J.Stickman.png" alt="J.Stickman" class="stickman-img" loading="lazy" />
+                    </div>
                 </div>
                 <h1 class="developer-nickname"><span id="developer-nickname-text">robledodu</span></h1>
-                <p class="ubicacion"><i class="fas fa-map-marker-alt"></i> <span data-i18n="location">Valencia,
-                        España</span></p>
+                <p class="ubicacion"><i class="fas fa-map-marker-alt"></i> <span data-i18n="location">Valencia, España</span></p>
 
                 <div class="redes-sociales">
-                    <a href="https://github.com/jorodu" target="_blank" aria-label="GitHub"><i
-                            class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/jorge-robledo" target="_blank" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="https://jorodu.itch.io" target="_blank" aria-label="Itch.io"><i
-                            class="fab fa-itch-io"></i></a>
-                    <a href="https://twitter.com/jorodu_dev" target="_blank" aria-label="Twitter"><i
-                            class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/jorobledodu" target="_blank" aria-label="GitHub">
+                        <span class="svg-icon github-icon"></span>
+                    </a>
+                    <a href="https://linkedin.com/in/jorobledodu" target="_blank" aria-label="LinkedIn">
+                        <span class="svg-icon linkedin-icon"></span>
+                    </a>
+                    <a href="https://robledodu.itch.io/" target="_blank" aria-label="Itch.io">
+                        <span class="svg-icon itchio-icon"></span>
+                    </a>
+                    <a href="https://x.com/robledodu" target="_blank" aria-label="Twitter">
+                        <span class="svg-icon twitter-icon"></span>
+                    </a>
                 </div>
-
                 <div class="contacto-email">
                     <button id="copy-email" class="copy-email-btn" aria-label="Copiar email">
-                        <i class="fas fa-copy"></i> contacto@jorodu.com
+                        <i class="fas fa-copy"></i> robledodu@gmail.com
                         <span class="tooltip">¡Copiado!</span>
                     </button>
                 </div>
 
                 <div class="cv-descarga">
-                    <a href="Resources/PDF/Curriculum-Español-Jorge-Robledo.pdf" class="boton-cv" download
-                        data-i18n="download-cv">
-                        <i class="fas fa-download"></i> <span class="visually-hidden">Descargar</span> CV
+                    <a href="Resources/PDF/Curriculum-Español-Jorge-Robledo.pdf" class="boton-cv" target="_blank"
+                        data-i18n="view-cv">
+                        <i class="fas fa-eye"></i> <span class="visually-hidden">Ver</span> CV
                     </a>
                 </div>
 
@@ -86,9 +91,9 @@
                     <h2 data-i18n="experience-title">Experiencia</h2>
                     <div class="experience-timeline">
                         <div class="timeline-item">
-                            <div class="timeline-date">2022 - Presente</div>
+                            <div class="timeline-date">2024 - Presente</div>
                             <div class="timeline-content">
-                                <h3>Unity Developer</h3>
+                                <h3>Master </h3>
                                 <p class="timeline-company">Game Studio XYZ</p>
                                 <p class="timeline-description">Desarrollo de videojuegos con Unity y C#. Implementación
                                     de mecánicas de juego, sistemas de IA y optimización de rendimiento.</p>
@@ -104,13 +109,12 @@
                                     rendimiento.</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-date">2018 - 2020</div>
+                        <div class="timeline-item academic">
+                            <div class="timeline-date">2016 - 2020</div>
                             <div class="timeline-content">
-                                <h3>Junior Web Developer</h3>
-                                <p class="timeline-company">Digital Solutions</p>
-                                <p class="timeline-description">Desarrollo y mantenimiento de sitios web corporativos.
-                                    Colaboración en proyectos de comercio electrónico y aplicaciones web.</p>
+                                <h3>Grado en Ingeniería Informática</h3>
+                                <p class="timeline-institution">Universidad Politécnica de Valencia</p>
+                                <p class="timeline-description">Especialización en desarrollo de software y sistemas interactivos. Proyectos destacados en programación de videojuegos y aplicaciones multiplataforma.</p>
                             </div>
                         </div>
                     </div>
@@ -196,7 +200,9 @@
             <button id="close-game" class="close-game" aria-label="Cerrar demo">
                 <i class="fas fa-times"></i>
             </button>
-            <iframe id="game-frame" allowfullscreen></iframe>
+            <div class="game-frame-container">
+                <iframe id="game-frame" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
