@@ -7,7 +7,7 @@ const translations = {
     "es": {
         "location": "Valencia, España",
         "about-title": "Sobre mí",
-        "about-description": "Desarrollador de videojuegos y programador con pasión por crear experiencias interactivas únicas.",
+        "about-description": "Soy Jorge Robledo, desarrollador y programador de videojuegos. Actualmente me estoy formando en el campo del diseño. Me apasiona crear experiencias y mecánicas interactivas y únicas.",
         "experience-title": "Experiencia laboral y académica",
         "tools-title": "Herramientas y Tecnologías",
         "view-cv": "Ver CV",
@@ -35,7 +35,7 @@ const translations = {
     "en": {
         "location": "Valencia, Spain",
         "about-title": "About Me",
-        "about-description": "Game developer and programmer passionate about creating unique interactive experiences.",
+        "about-description": "I'm Jorge Robledo, videogame developer and programmer. I'm currently training in the design field. I'm passionate about creating interactive and unique experiences and mechanics.",
         "experience-title": "Work and academic experience",
         "tools-title": "Tools & Technologies",
         "view-cv": "View CV",
