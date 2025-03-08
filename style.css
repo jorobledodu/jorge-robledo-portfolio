@@ -47,6 +47,39 @@ body {
     transition: var(--transition);
 }
 
+/* Custom Scrollbar Styles */
+/* For Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--current-bg);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--current-bg);
+    transition: var(--transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--current-bg);
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--current-bg);
+}
+
 /* Top navbar styles */
 .top-navbar {
     position: fixed;
@@ -234,7 +267,7 @@ body {
 
 .timeline-item.academic:hover::before {
     transform: scale(1.2);
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
 }
 
 .timeline-date {
@@ -296,31 +329,16 @@ body {
 }
 
 .redes-sociales a:hover {
-    color: var(--color-primary);
+    color: var(--color-secondary);
     transform: translateY(-5px) scale(1.2);
-    text-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+    text-shadow: 0 5px 15px rgba(0, 182, 255, 0.4);
 }
-
-/* Removed yellow underline effect
-.redes-sociales a:hover::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 25%;
-    width: 50%;
-    height: 3px;
-    background-color: var(--color-secondary);
-    border-radius: 3px;
-    animation: pulse 1.5s infinite;
-}
-*/
 
 @keyframes pulse {
     0% { opacity: 0.6; }
     50% { opacity: 1; }
     100% { opacity: 0.6; }
 }
-
 
 /* Sección derecha */
 .main-content {
@@ -441,7 +459,6 @@ body.dark-theme {
     --shadow-md: 0 8px 24px rgba(255, 255, 255, 0.08);
 }
 
-
 .dark-theme .etiquetas-tecnologias li {
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-dark);
@@ -449,25 +466,6 @@ body.dark-theme {
 .etiquetas-tecnologias li svg,
 .etiquetas-tecnologias li i {
     margin-right: 0.5rem;
-}
-/* Habilidades */
-.skill-level {
-    height: 8px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    margin-top: 0.5rem;
-    overflow: hidden;
-}
-
-.skill-level::after {
-    content: '';
-    display: block;
-    height: 100%;
-    background: var(--color-primary);
-    width: attr(data-level);
-    /*Usamos el atributo data-level*/
-    border-radius: 4px;
-    transition: width 1s ease-out;
 }
 
 /* Formulario de contacto */
@@ -859,7 +857,7 @@ body.dark-theme {
 }
 
 .theme-toggle:hover .fa-moon {
-    color: #f1c40f;
+    color: var(--color-secondary);
 }
 
 /* Estilos para los botones de selección de idioma */

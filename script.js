@@ -5,7 +5,6 @@
  */
 
 import svgIcons from './svg-icons.js';
-import setupAnimations from './setupAnimations.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     // DOM element references for better performance and maintainability
@@ -629,9 +628,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Configurar event listeners para botones interactivos
         setupEventListeners();
-
-        // Configurar animaciones
-        setupAnimations();
     }
     init();
 });

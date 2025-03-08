@@ -18,7 +18,7 @@
         }
       ],
       "links": {
-        "demo": "https://itch.io/embed-upload/12228899?color=444444",
+        "demo": "https://github.com/jorobledodu/Test",
         "itch": "https://robledodu.itch.io/in-game-command-console",
         "github": "https://github.com/jorodu/command-console"
       },
@@ -60,8 +60,7 @@
         }
       ],
       "links": {
-        "itch": "https://robledodu.itch.io/mecanica-fps-tfg-jorge-robledo",
-        "github": "https://github.com/jorodu/command-console"
+        "itch": "https://robledodu.itch.io/mecanica-fps-tfg-jorge-robledo"
       },
       "gallery": [
         "Resources/Videos/mecanicas_FPS.mp4"
@@ -323,8 +322,7 @@
       ],
       "links": {
         "demo": "https://itch.io/embed-upload/5190429?color=444444",
-        "itch": "https://jorodu.itch.io/flafy-bat",
-        "github": "https://github.com/jorodu/flafy-bat"
+        "itch": "https://jorodu.itch.io/flafy-bat"
       },
       "gallery": [
         "Resources/Images/flafy_bat-icon.png",
