@@ -60,7 +60,8 @@
         }
       ],
       "links": {
-        "itch": "https://robledodu.itch.io/mecanica-fps-tfg-jorge-robledo"
+        "itch": "https://robledodu.itch.io/mecanica-fps-tfg-jorge-robledo",
+        "pdf": "Resources/PDF/TFG_mecanicas_FPS.pdf"
       },
       "gallery": [
         "Resources/Videos/mecanicas_FPS.mp4"
@@ -96,7 +97,8 @@
         }
       ],
       "links": {
-        "itch": "https://robledodu.itch.io/magic-shooter"
+        "itch": "https://robledodu.itch.io/magic-shooter",
+        "pdf": "Resources/PDF/TFG_magic_shooter.pdf"
       },
       "gallery": [
         "Resources/Images/magic_shooter-icon.jpg",

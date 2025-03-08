@@ -168,6 +168,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <a href="${project.links.github}" target="_blank" class="boton-icono" aria-label="Ir a ${project.title} en GitHub">
                             <i class="fab fa-github"></i>
                         </a>` : ''}
+                        ${project.links.pdf ? `
+                        <a href="${project.links.pdf}" target="_blank" class="boton-icono" aria-label="Ver documento PDF de ${project.title}">
+                            <i class="fas fa-file-pdf"></i>
+                        </a>` : ''}
                     </div>
                 </div>
           </div>
@@ -410,6 +414,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             ${project.links.github ? `
             <a href="${project.links.github}" target="_blank" class="boton-icono" aria-label="Ir a ${project.title} en GitHub">
                 <i class="fab fa-github"></i>
+            </a>` : ''}
+            ${project.links.pdf ? `
+            <a href="${project.links.pdf}" target="_blank" class="boton-icono" aria-label="Ver documento PDF de ${project.title}">
+                <i class="fas fa-file-pdf"></i>
             </a>` : ''}
         `;
 
