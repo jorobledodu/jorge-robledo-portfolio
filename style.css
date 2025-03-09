@@ -143,12 +143,12 @@ body {
 
 .stickman-container {
     position: absolute;
-    left: 130%;
+    right: -45px; /* Position at the edge consistently across devices */
     bottom: 35px;
     width: 40px;
     height: 40px;
     z-index: 3;
-    transform: translateX(-50%) scaleX(-1);
+    transform: scaleX(-1);
 }
 
 .stickman-img {
@@ -663,6 +663,11 @@ body.dark-theme {
         height: auto;
         top: 0;
     }
+    
+    /* Ensure stickman stays at the edge on tablet screens */
+    .stickman-container {
+        right: -45px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -679,6 +684,11 @@ body.dark-theme {
         margin: 1rem auto;
         padding: 1rem;
         max-width: 95%;
+    }
+    
+    /* Maintain stickman position on mobile screens */
+    .stickman-container {
+        right: -45px;
     }
 }
 

@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         gameOverlay: document.getElementById('game-demo-overlay'),
         gameFrame: document.getElementById('game-frame'),
         herramientasContainer: document.querySelector('.herramientas .etiquetas-tecnologias'), // Contenedor de herramientas
-        socialIcons: document.querySelectorAll('.svg-icon') // Iconos de redes sociales
+        socialIcons: document.querySelectorAll('.svg-icon'), // Iconos de redes sociales
+        profileImgContainer: document.querySelector('.profile-img-container') // Added profile image container reference
     };
 
     // Estado de la aplicación
@@ -41,8 +42,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         currentFilter: 'all',
         currentLang: localStorage.getItem('language') || 'es',
         currentTheme: localStorage.getItem('theme') || 'dark',
-
-        activeProject: null
+        activeProject: null,
+        profileImgFlipped: false // Added state to track if profile image is flipped
     };
 
     // Lista de habilidades (fuera de las funciones, para que sea accesible globalmente)
@@ -96,6 +97,27 @@ document.addEventListener('DOMContentLoaded', async () => {
             const key = element.dataset.i18nPlaceholder;
             element.placeholder = translations[lang][key];
         });
+    }
+
+    // Function to handle profile image flip for mobile devices
+    function setupProfileImageInteraction() {
+        if (DOM.profileImgContainer) {
+            // Add touch event for mobile devices
+            DOM.profileImgContainer.addEventListener('click', () => {
+                const profileImgInner = DOM.profileImgContainer.querySelector('.profile-img-inner');
+                if (profileImgInner) {
+                    // Toggle the flipped state
+                    state.profileImgFlipped = !state.profileImgFlipped;
+                    
+                    // Apply or remove the rotation based on state
+                    if (state.profileImgFlipped) {
+                        profileImgInner.style.transform = 'rotateY(180deg)';
+                    } else {
+                        profileImgInner.style.transform = 'rotateY(0deg)';
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -633,6 +655,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Configurar copiar email
         setupEmailCopy();
+
+        // Setup profile image interaction for mobile devices
+        setupProfileImageInteraction();
 
         // Configurar event listeners para botones interactivos
         setupEventListeners();
