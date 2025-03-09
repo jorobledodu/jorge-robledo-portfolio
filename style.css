@@ -136,19 +136,19 @@ body {
 .profile-img-container {
     width: 150px;
     height: 150px;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 0.5rem;
     perspective: 1000px;
     position: relative;
 }
 
 .stickman-container {
     position: absolute;
-    left: 99%;
-    bottom: 12px;
+    left: 130%;
+    bottom: 35px;
     width: 40px;
     height: 40px;
-    z-index: 1;
-    transform: translateX(-50%);
+    z-index: 3;
+    transform: translateX(-50%) scaleX(-1);
 }
 
 .stickman-img {
@@ -187,6 +187,15 @@ body {
 .profile-img {
     max-width: 100%;
     height: auto;
+}
+
+.profile-line {
+    width: 80%;
+    height: 3px;
+    background: var(--color-primary);
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .developer-nickname {
