@@ -15,12 +15,16 @@
         {
           "name": "C#",
           "iconClass": "fas fa-code"
+        },
+        {
+          "name": "Herramientas",
+          "iconClass": "fas fa-tools"
         }
       ],
       "links": {
-        "demo": "https://github.com/jorobledodu/Test",
+        "demo": "https://itch.io/embed-upload/12228899?color=444444",
         "itch": "https://robledodu.itch.io/in-game-command-console",
-        "github": "https://github.com/jorodu/command-console"
+        "github": "https://github.com/jorobledodu/Test"
       },
       "gallery": [
         "Resources/Videos/command_console.mp4",
@@ -285,7 +289,7 @@
         }
       ],
       "links": {
-        "github": "https://robledodu.itch.io/the-traveller"
+        "itch": "https://robledodu.itch.io/the-traveller"
       },
       "gallery": [
         "Resources/Images/soulveler-icon.png",

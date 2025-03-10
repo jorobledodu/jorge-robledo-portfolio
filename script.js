@@ -613,10 +613,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // Cerrar el overlay de la demo
+        // Cerrar el overlay de la demo
         DOM.gameOverlay.addEventListener('click', (event) => {
             if (event.target === DOM.gameOverlay || event.target.closest('#close-game')) {
                 DOM.gameOverlay.style.display = 'none';
                 DOM.gameFrame.src = ''; // Detener la carga del iframe
+                document.body.style.overflow = 'auto'; // Restaurar el scroll
             }
         });
 
