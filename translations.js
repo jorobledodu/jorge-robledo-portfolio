@@ -30,7 +30,8 @@ const translations = {
         "alert-valid-email": "Por favor, introduce un email válido.",
         "playable": "Jugable",
         "not-playable": "No jugable",
-        "demo-unavailable": "Demo no disponible en este momento."
+        "demo-unavailable": "Demo no disponible en este momento.",
+        "contact-error": "Error al enviar el mensaje. Por favor, inténtalo de nuevo."
     },
     "en": {
         "location": "Valencia, Spain",
@@ -58,6 +59,7 @@ const translations = {
         "alert-valid-email": "Please enter a valid email.",
         "playable": "Playable",
         "not-playable": "Not playable",
-        "demo-unavailable": "Demo not available at this time."
+        "demo-unavailable": "Demo not available at this time.",
+        "contact-error": "Error sending the message. Please try again."
     }
 };

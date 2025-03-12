@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const isVideoThumbnail = project.thumbnail && project.thumbnail.toLowerCase().endsWith('.mp4');
             const thumbnailContent = isVideoThumbnail ? 
                 `<div class="card-img-container video-thumbnail">
-                    <video src="${project.thumbnail}" muted loop playsinline class="img-proyecto">
+                    <video muted loop playsinline class="img-proyecto">
                         <source src="${project.thumbnail}" type="video/mp4">
                     </video>
                     <i class="fas fa-play video-play-icon"></i>
@@ -480,7 +480,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const copyEmailBtn = document.getElementById('copy-email');
         if (copyEmailBtn) {
             copyEmailBtn.addEventListener('click', function () {
-                const email = 'contacto@jorodu.com';
+                // Extract just the email text, ignoring the icon
+                const emailText = this.textContent.trim();
+                const email = emailText.replace(/^\s*\S+\s+/, ''); // Remove icon and whitespace
+                
                 navigator.clipboard.writeText(email).then(() => {
                     // Mostrar tooltip
                     this.classList.add('copied');
@@ -568,38 +571,54 @@ document.addEventListener('DOMContentLoaded', async () => {
         DOM.contactForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            // Recolectar datos del formulario
-            const formData = new FormData(DOM.contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message')
-            };
+            // Validar el formulario
+            const name = DOM.contactForm.querySelector('#from_name').value.trim();
+            const email = DOM.contactForm.querySelector('#email').value.trim();
+            const message = DOM.contactForm.querySelector('#message').value.trim();
+
+            // Validación básica
+            if (!name || !email || !message) {
+                alert(translations[state.currentLang]["alert-complete-fields"]);
+                return;
+            }
+
+            // Validar formato de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert(translations[state.currentLang]["alert-valid-email"]);
+                return;
+            }
+
+            // Mostrar indicador de carga
+            const submitBtn = DOM.contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${translations[state.currentLang]["contact-send"]}`;
+            submitBtn.disabled = true;
 
             try {
-                const response = await fetch('URL_DEL_BACKEND', { // Reemplaza con tu URL
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'  // Importante para Formspree
-                    },
-                    body: JSON.stringify(data)
-                });
+                // Enviar el formulario usando EmailJS con el método sendForm como solicitado
+                const serviceID = 'service_dq16f8a';
+                const templateID = 'template_s3eid6f';
+                
+                // Usar el método sendForm directamente con el formulario
+                await emailjs.sendForm(serviceID, templateID, DOM.contactForm)
 
-                if (response.ok) {
-                    // Mostrar mensaje de éxito
-                    DOM.formSuccess.style.display = 'block';
-                    DOM.contactForm.reset(); // Limpiar el formulario
+                // Mostrar mensaje de éxito
+                DOM.formSuccess.style.display = 'block';
+                DOM.contactForm.reset(); // Limpiar el formulario
 
-                } else {
-                    // Mostrar mensaje de error.  Podrías crear un div para errores también.
-                    console.error('Error al enviar el formulario:', response.status, response.statusText);
-                    alert(translations[state.currentLang]["contact-error"]);
-                }
+                // Ocultar el mensaje de éxito después de 5 segundos
+                setTimeout(() => {
+                    DOM.formSuccess.style.display = 'none';
+                }, 5000);
 
             } catch (error) {
-                console.error('Error en la petición:', error);
-                alert(translations[state.currentLang]["contact-error"]); // Traducido
+                console.error('Error al enviar el formulario:', error);
+                alert(translations[state.currentLang]["contact-error"] || 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+            } finally {
+                // Restaurar el botón
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
 
@@ -613,7 +632,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // Cerrar el overlay de la demo
-        // Cerrar el overlay de la demo
         DOM.gameOverlay.addEventListener('click', (event) => {
             if (event.target === DOM.gameOverlay || event.target.closest('#close-game')) {
                 DOM.gameOverlay.style.display = 'none';
@@ -621,7 +639,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 document.body.style.overflow = 'auto'; // Restaurar el scroll
             }
         });
-
     }
 
     // Inicializar iconos SVG para redes sociales
